@@ -1,0 +1,18 @@
+.main {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    justify-content: center;
+}
+
+.earth {
+    display: block;
+    object-fit: cover;
+    position: fixed;
+    top: 18%;
+    left: 0;
+    z-index: -1;
+    width: 536px;
+    min-width: 377px;
+    height: auto;
+}

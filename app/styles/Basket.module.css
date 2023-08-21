@@ -1,0 +1,79 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 150px;
+    padding: 16px;
+    border-radius: 24px;
+    background: var(--COLOR_BASKET-WRAPP);
+    height: 129px;
+    gap: 32px;
+    position: fixed;
+    top: 148px;
+    right: 24%;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.title {
+    color: var(--COLOR_WHITE);
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px;
+}
+
+.counter {
+    color: var(--COLOR_WHITE);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+
+}
+
+.asteroid {
+    color: var(--COLOR_WHITE);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    padding-left: 5px;
+}
+
+.button {
+    height: 48px;
+    padding: 8px 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    border-radius: 40px;
+    background: var(--COLOR_ORANGE);
+}
+
+.disabled {
+    height: 48px;
+    padding: 8px 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    border-radius: 40px;
+    background: var(--COLOR_GRAY);
+}
+
+.titleBtn {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px;
+    color: var(--COLOR_WHITE);
+}
+
+.link {
+    position: absolute;
+    bottom: 15px;
+    left: 30px;
+}

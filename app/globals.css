@@ -1,0 +1,16 @@
+@import "./vendor/normalize.css";
+
+body {
+    font-family: Arial, helvetica, sans-serif;
+    background-color: var(--COLOR_MAIN);
+}
+
+:root {
+    --COLOR_MAIN: rgb(0, 0, 0);
+    --COLOR_WHITE: rgb(255, 255, 255);
+    --COLOR_GRAY: rgba(255, 255, 255, 0.5);
+    --COLOR_ORANGE: rgb(248, 102, 0);
+    --COLOR_BASKET-WRAPP: rgb(35, 37, 38);
+    --COLOR_ORANGE-TITLE: rgb(248, 102, 0, 1);
+    --COLOR_BTN_START: rgba(248, 102, 0, 0.15);
+}

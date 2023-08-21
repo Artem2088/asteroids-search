@@ -1,0 +1,27 @@
+.header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 16px;
+    gap: 8px;
+    max-width: 375px;
+    margin-bottom: 9px;
+}
+
+.title {
+    font-family: passion, sans-serif;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    color: var(--COLOR_ORANGE-TITLE);
+}
+
+.description {
+    font-family: helvetica, sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    color: var(--COLOR_WHITE);
+}
