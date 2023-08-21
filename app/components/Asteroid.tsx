@@ -15,6 +15,7 @@ interface IAsteroidProps {
   date: string;
   activ: boolean;
   addOrderLists: (item: AsteroidProps) => void;
+  item: AsteroidProps;
 }
 
 const Asteroid: FC<IAsteroidProps> = ({ item, date, activ, addOrderLists }) => {
@@ -22,6 +23,12 @@ const Asteroid: FC<IAsteroidProps> = ({ item, date, activ, addOrderLists }) => {
   const [size, setSize] = useState<number>(0);
   const [flag, setIsFlag] = useState<boolean>(false);
   const [status, setIsStatus] = useState<boolean>(false);
+  
+
+  useEffect(() => {
+    const localItem = JSON.stringify(item);
+    localStorage.setItem('item', localItem)
+  }, [])
 
   useEffect(() => {
     for (let key in item.close_approach_data) {
