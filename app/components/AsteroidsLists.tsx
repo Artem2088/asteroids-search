@@ -7,6 +7,7 @@ import { MaininfoProps, AsteroidProps } from "@/types";
 interface IMainProps {
   loading: boolean;
   addOrderLists: (item: AsteroidProps) => void;
+  getItemId: (item: AsteroidProps) => void;
   mainInfo: MaininfoProps[];
 }
 
@@ -14,6 +15,7 @@ const AsteroidsLists: FC<IMainProps> = ({
   mainInfo,
   loading,
   addOrderLists,
+  getItemId,
 }) => {
   const [date, setDate] = useState<string>("");
   const [info, setInfo] = useState<any[]>([]);
@@ -65,6 +67,7 @@ const AsteroidsLists: FC<IMainProps> = ({
               date={date}
               activ={activ}
               addOrderLists={addOrderLists}
+              getItemId={getItemId}
             />
           ))
         )}

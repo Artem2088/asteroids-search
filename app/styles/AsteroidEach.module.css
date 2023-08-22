@@ -1,0 +1,225 @@
+.AsteroidEach {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100vw;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 50px;
+}
+
+.name {
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 32px;
+    color: var(--COLOR_WHITE);
+    text-shadow: var(--COLOR_SHADOW);
+}
+
+.magnitudeH {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    color: var(--COLOR_WHITE);
+    text-align: center;
+    padding: 20px 0;
+    text-shadow: var(--COLOR_SHADOW);
+}
+
+.approach {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    color: var(--COLOR_WHITE);
+    text-align: center;
+    padding-bottom: 8px;
+    text-shadow: var(--COLOR_SHADOW);
+}
+
+.approachDate {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px;
+    color: var(--COLOR_WHITE);
+    padding-bottom: 2px;
+    padding-left: 5px;
+    text-shadow: var(--COLOR_SHADOW);
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 20px 0;
+}
+
+.distanceTitle {
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 32px;
+    color: var(--COLOR_WHITE);
+    text-shadow: var(--COLOR_SHADOW);
+}
+
+.kmBox {
+    display: flex;
+    flex-direction: column;
+    align-items: self-start;
+}
+
+.kilometerMax {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    color: var(--COLOR_WHITE);
+    text-align: center;
+    padding-bottom: 8px;
+    text-shadow: var(--COLOR_SHADOW);
+}
+
+.kilometerMin {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    color: var(--COLOR_WHITE);
+    text-align: center;
+    padding-bottom: 8px;
+    text-shadow: var(--COLOR_SHADOW);
+}
+
+.metersBox {
+    display: flex;
+    flex-direction: column;
+    align-items: self-start;
+}
+
+.metersMax {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    color: var(--COLOR_WHITE);
+    text-align: center;
+    padding-bottom: 8px;
+    text-shadow: var(--COLOR_SHADOW);
+}
+
+.metersMin {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    color: var(--COLOR_WHITE);
+    text-align: center;
+    padding-bottom: 8px;
+    text-shadow: var(--COLOR_SHADOW);
+}
+
+.milesBox {
+    display: flex;
+    flex-direction: column;
+    align-items: self-start;
+}
+
+.milesMax {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    color: var(--COLOR_WHITE);
+    text-align: center;
+    padding-bottom: 8px;
+    text-shadow: var(--COLOR_SHADOW);
+}
+
+.milesMin {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    color: var(--COLOR_WHITE);
+    text-align: center;
+    padding-bottom: 8px;
+    text-shadow: var(--COLOR_SHADOW);
+}
+
+.hazardous {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    color: var(--COLOR_WHITE);
+    text-align: center;
+    padding-bottom: 8px;
+    text-shadow: var(--COLOR_SHADOW);
+}
+
+.notDanger {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    color: var(--COLOR_GREEN);
+    text-align: center;
+    padding-bottom: 8px;
+    text-shadow: none;
+}
+
+.danger {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    color: var(--COLOR_RED);
+    text-align: center;
+    padding-bottom: 8px;
+    text-shadow: none;
+}
+
+.linkNasa {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    color: var(--COLOR_WHITE);
+    text-align: center;
+    padding-top: 8px;
+    text-decoration: none;
+    text-shadow: var(--COLOR_SHADOW);
+}
+
+.asteroid {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+}
+
+.back {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    color: var(--COLOR_ORANGE);
+    text-align: center;
+    padding-top: 100px;
+    text-decoration: none;
+    text-shadow: var(--COLOR_SHADOW);
+}

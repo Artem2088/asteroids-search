@@ -18,15 +18,24 @@ export type MaininfoProps = {
 }
 
 export type AsteroidProps = {
-    id: number;
+    id: string;
     name?: string;
-    date: string;
-    meters?: string;
-    estimated_diameter_max?: number;
-    estimated_diameter?: {}
+    date?: string;
+    estimated_diameter?: {
+        meters: { estimated_diameter_max?: number; estimated_diameter_min?: number };
+        kilometers: { estimated_diameter_max?: number; estimated_diameter_min?: number };
+        miles: { estimated_diameter_max?: number; estimated_diameter_min?: number }
+    };
     is_potentially_hazardous_asteroid
     : boolean;
-    close_approach_data?: {};
-    kilometers?: string;
+    close_approach_data?: {
+        close_approach_data?: string;
+        miss_distance?: {
+            kilometers?: string; lunar?: string
+        }
+    };
     data: [];
+    absolute_magnitude_h?: number;
+
+
 }

@@ -10,25 +10,27 @@ import danger from "../../public/icons/danger.svg";
 import { Button } from ".";
 import { FC, useEffect, useState } from "react";
 import { AsteroidProps } from "@/types";
+import Link from "next/link";
 
 interface IAsteroidProps {
   date: string;
   activ: boolean;
   addOrderLists: (item: AsteroidProps) => void;
+  getItemId: (item: AsteroidProps) => void;
   item: AsteroidProps;
 }
 
-const Asteroid: FC<IAsteroidProps> = ({ item, date, activ, addOrderLists }) => {
-  const [distance, setDistance] = useState<object[]>([]);
+const Asteroid: FC<IAsteroidProps> = ({
+  item,
+  date,
+  activ,
+  addOrderLists,
+  getItemId,
+}) => {
+  const [distance, setDistance] = useState([]);
   const [size, setSize] = useState<number>(0);
   const [flag, setIsFlag] = useState<boolean>(false);
   const [status, setIsStatus] = useState<boolean>(false);
-  
-
-  useEffect(() => {
-    const localItem = JSON.stringify(item);
-    localStorage.setItem('item', localItem)
-  }, [])
 
   useEffect(() => {
     for (let key in item.close_approach_data) {
@@ -37,7 +39,9 @@ const Asteroid: FC<IAsteroidProps> = ({ item, date, activ, addOrderLists }) => {
   }, [distance]);
 
   useEffect(() => {
-    setSize(Math.floor(item.estimated_diameter?.meters.estimated_diameter_max));
+    setSize(
+      Math.floor(item?.estimated_diameter?.meters.estimated_diameter_max)
+    );
   }, []);
 
   const MouseOver = () => {
@@ -55,7 +59,11 @@ const Asteroid: FC<IAsteroidProps> = ({ item, date, activ, addOrderLists }) => {
 
   return (
     <li className={styles.wrapper}>
-      <h3 className={styles.title}>{date}</h3>
+      <Link href={`/asteroid/${item.id}`} className={styles.linkItem}>
+        <h3 className={styles.title} onClick={() => getItemId(item)}>
+          {date}
+        </h3>
+      </Link>
       <div className={styles.container}>
         <div className={styles.boxDist}>
           {activ ? (

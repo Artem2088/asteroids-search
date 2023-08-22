@@ -13,4 +13,7 @@ body {
     --COLOR_BASKET-WRAPP: rgb(35, 37, 38);
     --COLOR_ORANGE-TITLE: rgb(248, 102, 0, 1);
     --COLOR_BTN_START: rgba(248, 102, 0, 0.15);
+    --COLOR_SHADOW: 1px 1px 2px red, 0 0 1em blue, 0 0 0.2em blue;
+    --COLOR_GREEN: rgb(0, 128, 0);
+    --COLOR_RED: rgb(255, 0, 0);
 }
