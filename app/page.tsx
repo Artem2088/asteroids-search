@@ -7,18 +7,14 @@ import { AsteroidLists, Basket } from "./components";
 import { useEffect, useState } from "react";
 import { getAsteroidInfo, getServerSideProps } from "./utils/MainApi";
 import { AsteroidProps, MaininfoProps } from "@/types";
+import { useRouter } from 'next/navigation';
 
 const Home: FC = () => {
   const [mainInfo, setMainInfo] = useState<MaininfoProps[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [orderLists, setOrderLists] = useState<AsteroidProps[]>([]);
   const [itemId, setItemId] = useState<string>("");
-  const [localItemId, setLocalItemId] = useState();
-
-  useEffect(() => {
-    const localItem = JSON.stringify(localItemId);
-    localStorage.setItem("item", localItem);
-  }, [localItemId]);
+  const { push } = useRouter();
 
   useEffect(() => {
     getData();
@@ -32,7 +28,7 @@ const Home: FC = () => {
   }, [itemId]);
 
   useEffect(() => {
-    const newOrder = JSON.stringify({ orderLists });
+    const newOrder = JSON.stringify( orderLists );
     localStorage.setItem("localLists", newOrder);
   }, [orderLists]);
 
@@ -68,7 +64,9 @@ const Home: FC = () => {
   const getAsteroid = async () => {
     await getAsteroidInfo(itemId)
       .then((data) => {
-        setLocalItemId(data);
+        const localItem = JSON.stringify(data);
+        localStorage.setItem("item", localItem);
+        push('/asteroid/[id]');
       })
       .catch((err) => {
         console.log(err);

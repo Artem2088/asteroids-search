@@ -1,5 +1,5 @@
 "use client";
-import { FC, useEffect, useState } from "react";
+import { FC} from "react";
 import { AsteroidProps } from "@/types";
 import { OrderItem } from "../components";
 import styles from "../styles/Order.module.css";
@@ -8,19 +8,9 @@ import earth from "../../public/images/planeta_zemlia.png";
 import Link from "next/link";
 
 const Order: FC = () => {
-  const [listsItem, setListsItem] = useState<AsteroidProps[]>([]);
-
   const getLocal =
     typeof window !== "undefined" ? localStorage.getItem("localLists") : null;
   const order = JSON.parse(getLocal!);
-
-  useEffect(() => {
-    let newOrderLIsts;
-    for (let key in order) {
-      newOrderLIsts = order[key];
-    }
-    setListsItem(newOrderLIsts);
-  }, []);
 
   const clearLocal = () => {
     localStorage.clear();
@@ -34,7 +24,7 @@ const Order: FC = () => {
         <Link href={"/"} className={styles.linkFromMain} onClick={clearLocal}>
           На главную
         </Link>
-        {listsItem?.map((item) => (
+        {order?.map((item: AsteroidProps) => (
           <OrderItem item={item} key={item.id} />
         ))}
       </ul>

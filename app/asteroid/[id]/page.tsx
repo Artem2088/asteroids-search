@@ -19,27 +19,19 @@ const AsteroidEach: FC<AsteroidProps> = () => {
   );
   const [diameterMilMax, setDiameterMilMax] = useState<number | undefined>(0);
   const [diameterMilMin, setDiameterMilMin] = useState<number | undefined>(0);
-
   const absoluteMagnitudeH = itemId?.absolute_magnitude_h;
-  // const getlocalId =
-  //   typeof window !== "undefined" ? localStorage.getItem("item") : null;
-  // const getlocalParse = JSON.parse(getlocalId!);
+  const getlocalId =
+      typeof window !== "undefined" ? localStorage.getItem("item") : null;
+  const getlocalParse = JSON.parse(getlocalId!);
   const hazardous: boolean = itemId?.is_potentially_hazardous_asteroid!;
 
   useEffect(() => {
-    try {
-      const getlocalId =
-        typeof window !== "undefined" ? localStorage.getItem("item") : null;
-      const getlocalParse = JSON.parse(getlocalId!);
-      setItemId(getlocalParse);
-    } catch (err) {
-      console.log(err);
-    }
-  }, []);
+       setItemId(getlocalParse)
+}, []);
 
   useEffect(() => {
     for (let key in itemId?.close_approach_data) {
-      setApproachDate(itemId.close_approach_data[key].close_approach_date);
+      setApproachDate(itemId.close_approach_data[key].close_approach_data);
     }
     setDiameterKmMax(
       itemId?.estimated_diameter?.kilometers.estimated_diameter_max
@@ -109,16 +101,17 @@ const AsteroidEach: FC<AsteroidProps> = () => {
         >
           Ссылка NASA
         </Link>
-        <Image
+        
+        <Link className={styles.back} href={"/"} onClick={localCleare}>
+          На главную
+        </Link>
+      </div>
+      <Image
           src={asteroid}
           alt='астероид'
           className={styles.asteroid}
           priority
         />
-        <Link className={styles.back} href={"/"} onClick={localCleare}>
-          На главную
-        </Link>
-      </div>
     </section>
   );
 };

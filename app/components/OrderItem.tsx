@@ -14,20 +14,20 @@ interface IOrderProps {
 }
 
 const OrderItem: FC<IOrderProps> = ({ item }) => {
-  const [distance, setDistance] = useState<object[]>([]);
+  const [distance, setDistance] = useState<AsteroidProps[]>([]);
   const [size, setSize] = useState<number>(0);
   const [date, setDate] = useState<string>("");
 
   useEffect(() => {
     for (let key in item.close_approach_data) {
       let newArr = item.close_approach_data[key];
-      setDate(newArr.close_approach_date);
+      setDate(newArr.close_approach_data);
       setDistance(item.close_approach_data[key].miss_distance);
     }
   }, [distance]);
 
   useEffect(() => {
-    setSize(Math.floor(item.estimated_diameter?.meters.estimated_diameter_max));
+    setSize(Math.floor(item.estimated_diameter?.meters.estimated_diameter_max!));
   }, []);
 
   return (

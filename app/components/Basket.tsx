@@ -1,4 +1,4 @@
-import { Children, FC } from "react";
+import { FC } from "react";
 import { Button } from ".";
 import styles from "../styles/Basket.module.css";
 import { AsteroidProps } from "@/types";

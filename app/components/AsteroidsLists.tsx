@@ -18,11 +18,11 @@ const AsteroidsLists: FC<IMainProps> = ({
   getItemId,
 }) => {
   const [date, setDate] = useState<string>("");
-  const [info, setInfo] = useState<any[]>([]);
+  const [info, setInfo] = useState<AsteroidProps[]>([]);
   const [activ, setIsActiv] = useState<boolean>(false);
 
   useEffect(() => {
-    for (let key in mainInfo.near_earth_objects) {
+    for (let key in mainInfo?.near_earth_objects) {
       setDate(key);
       setInfo(mainInfo.near_earth_objects[key]);
     }
@@ -33,7 +33,7 @@ const AsteroidsLists: FC<IMainProps> = ({
   };
 
   return (
-    <ul className={styles.lists}>
+    <ul className={styles.lists} >
       <div className={styles.wrapper}>
         <h2 className={styles.title}>Ближайшие подлёты астероидов</h2>
         <div className={styles.container}>

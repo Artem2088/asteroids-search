@@ -10,7 +10,6 @@ import danger from "../../public/icons/danger.svg";
 import { Button } from ".";
 import { FC, useEffect, useState } from "react";
 import { AsteroidProps } from "@/types";
-import Link from "next/link";
 
 interface IAsteroidProps {
   date: string;
@@ -27,20 +26,20 @@ const Asteroid: FC<IAsteroidProps> = ({
   addOrderLists,
   getItemId,
 }) => {
-  const [distance, setDistance] = useState([]);
+  const [distance, setDistance] = useState<AsteroidProps[]>([]);
   const [size, setSize] = useState<number>(0);
   const [flag, setIsFlag] = useState<boolean>(false);
   const [status, setIsStatus] = useState<boolean>(false);
 
   useEffect(() => {
     for (let key in item.close_approach_data) {
-      setDistance(item.close_approach_data[key].miss_distance);
+      setDistance(item.close_approach_data[key].miss_distance!);
     }
   }, [distance]);
 
   useEffect(() => {
     setSize(
-      Math.floor(item?.estimated_diameter?.meters.estimated_diameter_max)
+      Math.floor(item?.estimated_diameter?.meters.estimated_diameter_max!)
     );
   }, []);
 
@@ -59,12 +58,10 @@ const Asteroid: FC<IAsteroidProps> = ({
 
   return (
     <li className={styles.wrapper}>
-      <Link href={`/asteroid/${item.id}`} className={styles.linkItem}>
-        <h3 className={styles.title} onClick={() => getItemId(item)}>
+        <h3 className={styles.title} onClick={async() => await getItemId(item)}>
           {date}
         </h3>
-      </Link>
-      <div className={styles.container}>
+      <div className={styles.container} >
         <div className={styles.boxDist}>
           {activ ? (
             <span className={styles.distance}>{distance?.kilometers}км</span>

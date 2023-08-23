@@ -219,7 +219,9 @@
     line-height: 24px;
     color: var(--COLOR_ORANGE);
     text-align: center;
-    padding-top: 100px;
     text-decoration: none;
     text-shadow: var(--COLOR_SHADOW);
+    position: absolute;
+    top: 3%;
+    right: 6%;
 }
