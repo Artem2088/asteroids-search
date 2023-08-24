@@ -1,0 +1,59 @@
+.characteristick {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.date {
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 32px;
+    color: var(--COLOR_WHITE);
+    text-shadow: var(--COLOR_SHADOW);
+}
+
+.orbiting {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    color: var(--COLOR_WHITE);
+    text-align: center;
+    padding: 20px 0;
+    text-shadow: var(--COLOR_SHADOW);
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 32px;
+    color: var(--COLOR_WHITE);
+    text-shadow: var(--COLOR_SHADOW);
+}
+
+.distance {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    color: var(--COLOR_WHITE);
+    text-align: center;
+    padding: 20px 0;
+    text-shadow: var(--COLOR_SHADOW);
+}
+
+.velocity {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    color: var(--COLOR_WHITE);
+    text-align: center;
+    padding: 20px 0;
+    text-shadow: var(--COLOR_SHADOW);
+}

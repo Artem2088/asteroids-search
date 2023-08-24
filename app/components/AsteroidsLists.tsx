@@ -33,7 +33,7 @@ const AsteroidsLists: FC<IMainProps> = ({
   };
 
   return (
-    <ul className={styles.lists} >
+    <ul className={styles.lists}>
       <div className={styles.wrapper}>
         <h2 className={styles.title}>Ближайшие подлёты астероидов</h2>
         <div className={styles.container}>

@@ -2,7 +2,12 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 100vw;
+}
+
+@media screen and (max-width: 500px) {
+    .AsteroidEach {
+        padding: 0 10px;
+    }
 }
 
 .wrapper {
@@ -10,6 +15,12 @@
     flex-direction: column;
     align-items: flex-start;
     padding: 0 50px;
+}
+
+@media screen and (max-width: 500px) {
+    .wrapper {
+        padding: 0;
+    }
 }
 
 .name {
@@ -52,6 +63,7 @@
     padding-bottom: 2px;
     padding-left: 5px;
     text-shadow: var(--COLOR_SHADOW);
+
 }
 
 .container {
@@ -224,4 +236,43 @@
     position: absolute;
     top: 3%;
     right: 6%;
+}
+
+@media screen and (max-width: 500px) {
+    .back {
+        position: static;
+        margin-top: 30px;
+    }
+}
+
+.approachContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin: 40px 0;
+}
+
+@media screen and (min-width: 1600px) {
+    .approachContainer {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+@media screen and (max-width: 1450px) {
+    .approachContainer {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media screen and (max-width: 1110px) {
+    .approachContainer {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (min-width: 320px) and (max-width: 800px) {
+    .approachContainer {
+        display: flex;
+        flex-direction: column;
+    }
 }

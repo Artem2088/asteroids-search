@@ -1,14 +1,15 @@
 "use client";
 import { FC, useEffect, useState } from "react";
 import Link from "next/link";
-import { AsteroidProps } from "@/types";
+import { AsteroidCharachteristick, AsteroidProps } from "@/types";
 import styles from "../../styles/AsteroidEach.module.css";
-import Image from "next/image";
-import asteroid from "../../../public/images/wr-960.webp";
+import AsteroidCharacteristick from "@/app/components/AsteroidCharacteristick";
 
 const AsteroidEach: FC<AsteroidProps> = () => {
+  const [closeApproachDate, setCloseApproachDate] = useState<
+    AsteroidCharachteristick[]
+  >([]);
   const [itemId, setItemId] = useState<AsteroidProps>();
-  const [approachDate, setApproachDate] = useState<string>("");
   const [diameterKmMin, setDiameterKmMin] = useState<number | undefined>(0);
   const [diameterKmMax, setDiameterKmMax] = useState<number | undefined>(0);
   const [diameterMeterMax, setDiameterMeterMax] = useState<number | undefined>(
@@ -21,18 +22,17 @@ const AsteroidEach: FC<AsteroidProps> = () => {
   const [diameterMilMin, setDiameterMilMin] = useState<number | undefined>(0);
   const absoluteMagnitudeH = itemId?.absolute_magnitude_h;
   const getlocalId =
-      typeof window !== "undefined" ? localStorage.getItem("item") : null;
+    typeof window !== "undefined" ? localStorage.getItem("item") : null;
   const getlocalParse = JSON.parse(getlocalId!);
   const hazardous: boolean = itemId?.is_potentially_hazardous_asteroid!;
 
   useEffect(() => {
-       setItemId(getlocalParse)
-}, []);
+    setItemId(getlocalParse);
+  }, []);
 
   useEffect(() => {
-    for (let key in itemId?.close_approach_data) {
-      setApproachDate(itemId.close_approach_data[key].close_approach_data);
-    }
+    setCloseApproachDate(itemId?.close_approach_data);
+
     setDiameterKmMax(
       itemId?.estimated_diameter?.kilometers.estimated_diameter_max
     );
@@ -61,8 +61,7 @@ const AsteroidEach: FC<AsteroidProps> = () => {
           Абсолютная звёздная величина: {absoluteMagnitudeH}H
         </span>
         <span className={styles.approach}>
-          Дата максимального близкого подлета к Земле:
-          <span className={styles.approachDate}>{approachDate}</span>
+          Характеристики сближения с Землей:
         </span>
         <div className={styles.container}>
           <h3 className={styles.distanceTitle}>Размер:</h3>
@@ -101,17 +100,18 @@ const AsteroidEach: FC<AsteroidProps> = () => {
         >
           Ссылка NASA
         </Link>
-        
+        <ul className={styles.approachContainer}>
+          {closeApproachDate?.map((item) => (
+            <AsteroidCharacteristick
+              item={item}
+              key={item.close_approach_date}
+            />
+          ))}
+        </ul>
         <Link className={styles.back} href={"/"} onClick={localCleare}>
           На главную
         </Link>
       </div>
-      <Image
-          src={asteroid}
-          alt='астероид'
-          className={styles.asteroid}
-          priority
-        />
     </section>
   );
 };

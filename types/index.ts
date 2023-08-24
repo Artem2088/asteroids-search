@@ -24,7 +24,7 @@ export type AsteroidProps = {
     close_approach_data?: {
         [key: string]: {
             close_approach_data: string;
-            miss_distance?: {kilometers?: string; lunar?: string};
+            miss_distance?: { kilometers: number; lunar: number };
         };
     };
     estimated_diameter?: {
@@ -35,4 +35,20 @@ export type AsteroidProps = {
     id: string;
     is_potentially_hazardous_asteroid?: boolean;
     name?: string;
+}
+
+export type AsteroidCharachteristick = {
+    close_approach_date: string;
+    miss_distance: {
+        astronomical: string;
+        kilometers: string;
+        lunar: string;
+        miles: string;
+    };
+    orbiting_body: string;
+    relative_velocity: {
+        kilometers_per_hour: string;
+        kilometers_per_second: string;
+        miles_per_hour: string;
+    };
 }

@@ -38,12 +38,30 @@
     display: block;
     object-fit: cover;
     position: fixed;
-    top: 12%;
-    left: 0;
+    top: 18%;
+    margin-right: 800px;
     z-index: -1;
-    width: 536px;
-    min-width: 377px;
+    width: 377px;
     height: auto;
+}
+
+@media screen and (min-width: 1150px) {
+    .earth {
+        margin-right: 80%;
+        width: 536px;
+    }
+}
+
+@media screen and (min-width:480px) and (max-width: 580px) {
+    .earth {
+        margin-right: 800px;
+    }
+}
+
+@media screen and (min-width:320px) and (max-width: 479px) {
+    .earth {
+        margin-right: 164%;
+    }
 }
 
 .linkFromMain {

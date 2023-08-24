@@ -27,7 +27,9 @@ const OrderItem: FC<IOrderProps> = ({ item }) => {
   }, [distance]);
 
   useEffect(() => {
-    setSize(Math.floor(item.estimated_diameter?.meters.estimated_diameter_max!));
+    setSize(
+      Math.floor(item.estimated_diameter?.meters.estimated_diameter_max!)
+    );
   }, []);
 
   return (
@@ -35,7 +37,9 @@ const OrderItem: FC<IOrderProps> = ({ item }) => {
       <h3 className={styles.title}>{date}</h3>
       <div className={styles.container}>
         <div className={styles.boxDist}>
-          <span className={styles.distance}>{distance?.kilometers}км</span>
+          <span className={styles.distance}>
+            {Math.round(distance?.kilometers)}км
+          </span>
           <Image src={arrow} alt='стрелка' className={styles.arrow} />
         </div>
         <Image

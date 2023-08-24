@@ -10,6 +10,7 @@ import danger from "../../public/icons/danger.svg";
 import { Button } from ".";
 import { FC, useEffect, useState } from "react";
 import { AsteroidProps } from "@/types";
+import { WORDS } from "../utils/constants";
 
 interface IAsteroidProps {
   date: string;
@@ -26,22 +27,44 @@ const Asteroid: FC<IAsteroidProps> = ({
   addOrderLists,
   getItemId,
 }) => {
-  const [distance, setDistance] = useState<AsteroidProps[]>([]);
+  const [distanceKm, setDistanceKm] = useState<number>(0);
+  const [distanceLunar, setDistanceLunar] = useState<number>(0);
   const [size, setSize] = useState<number>(0);
   const [flag, setIsFlag] = useState<boolean>(false);
   const [status, setIsStatus] = useState<boolean>(false);
+  let newWords: string = "";
 
   useEffect(() => {
     for (let key in item.close_approach_data) {
-      setDistance(item.close_approach_data[key].miss_distance!);
+      let distanceKilometers = Number(
+        item.close_approach_data[key].miss_distance?.kilometers
+      );
+      let distanceLun = Number(
+        item.close_approach_data[key].miss_distance?.lunar
+      );
+      setDistanceKm(Math.round(distanceKilometers));
+      setDistanceLunar(Math.round(distanceLun));
     }
-  }, [distance]);
+  }, [distanceKm, distanceLunar]);
 
   useEffect(() => {
     setSize(
       Math.floor(item?.estimated_diameter?.meters.estimated_diameter_max!)
     );
   }, []);
+
+  const sklonenie = (
+    num: number,
+    txt: string[],
+    cases = [2, 0, 1, 1, 1, 2]
+  ) => {
+    newWords =
+      txt[
+        num % 100 > 4 && num % 100 < 20 ? 2 : cases[num % 10 < 5 ? num % 10 : 5]
+      ];
+  };
+
+  sklonenie(distanceLunar, WORDS);
 
   const MouseOver = () => {
     setIsFlag(true);
@@ -58,16 +81,16 @@ const Asteroid: FC<IAsteroidProps> = ({
 
   return (
     <li className={styles.wrapper}>
-        <h3 className={styles.title} onClick={async() => await getItemId(item)}>
-          {date}
-        </h3>
-      <div className={styles.container} >
+      <h3 className={styles.title} onClick={async () => await getItemId(item)}>
+        {date}
+      </h3>
+      <div className={styles.container}>
         <div className={styles.boxDist}>
           {activ ? (
-            <span className={styles.distance}>{distance?.kilometers}км</span>
+            <span className={styles.distance}>{distanceKm} км</span>
           ) : (
             <span className={styles.distance}>
-              {distance?.lunar} лунные орбиты
+              {distanceLunar} {newWords}
             </span>
           )}
 

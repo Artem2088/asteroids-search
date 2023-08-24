@@ -8,8 +8,33 @@
     height: 129px;
     gap: 32px;
     position: fixed;
-    top: 148px;
+    top: 155px;
     margin-left: 648px;
+    bottom: 0;
+}
+
+@media screen and (max-width: 1148px) {
+    .wrapper {
+        left: 75%;
+        margin-left: 0;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .wrapper {
+        display: flex;
+        flex-direction: row;
+        max-width: 768px;
+        padding: 16px;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 0;
+        width: 100%;
+        left: 0;
+        bottom: 0;
+        top: auto;
+        height: fit-content;
+    }
 }
 
 .container {
@@ -47,9 +72,6 @@
 .button {
     height: 48px;
     padding: 8px 16px;
-    justify-content: center;
-    align-items: center;
-    gap: 4px;
     border-radius: 40px;
     background: var(--COLOR_ORANGE);
 }
@@ -57,9 +79,6 @@
 .disabled {
     height: 48px;
     padding: 8px 16px;
-    justify-content: center;
-    align-items: center;
-    gap: 4px;
     border-radius: 40px;
     background: var(--COLOR_GRAY);
 }
@@ -76,4 +95,12 @@
     position: absolute;
     bottom: 15px;
     left: 30px;
+}
+
+@media screen and (max-width: 768px) {
+    .link {
+        position: relative;
+        left: -24px;
+        bottom: 0;
+    }
 }
