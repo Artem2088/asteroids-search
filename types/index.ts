@@ -33,7 +33,7 @@ export type AsteroidProps = {
         miles: { estimated_diameter_max?: number; estimated_diameter_min?: number }
     };
     is_potentially_hazardous_asteroid?: boolean;
-    name?: string;
+    name: string;
 }
 
 export type AsteroidCharachteristick = {

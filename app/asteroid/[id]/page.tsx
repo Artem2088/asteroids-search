@@ -6,6 +6,7 @@ import styles from "../../styles/AsteroidEach.module.css";
 import { AsteroidCharacteristick } from "@/app/components";
 
 const AsteroidEach: FC<AsteroidProps> = () => {
+  const [name, setName] = useState<string | undefined>("");
   const [closeApproachDate, setCloseApproachDate] = useState<
     AsteroidCharachteristick[]
   >([]);
@@ -33,6 +34,7 @@ const AsteroidEach: FC<AsteroidProps> = () => {
   }, []);
 
   useEffect(() => {
+    setName(itemId?.name);
     setCloseApproachDate(approach);
 
     setDiameterKmMax(
@@ -58,7 +60,7 @@ const AsteroidEach: FC<AsteroidProps> = () => {
   return (
     <section className={styles.AsteroidEach}>
       <div className={styles.wrapper}>
-        <h1 className={styles.name}>Название: {itemId?.name}</h1>
+        <h1 className={styles.name}>Название: {name}</h1>
         <span className={styles.magnitudeH}>
           Абсолютная звёздная величина: {absoluteMagnitudeH}H
         </span>
