@@ -14,7 +14,8 @@ interface IOrderProps {
 }
 
 const OrderItem: FC<IOrderProps> = ({ item }) => {
-  const [distance, setDistance] = useState<AsteroidProps[]>([]);
+  const [kilometers, setKilometers] = useState<number>(0);
+  const [lunar, setLunar] = useState<number>(0);
   const [size, setSize] = useState<number>(0);
   const [date, setDate] = useState<string>("");
 
@@ -22,9 +23,10 @@ const OrderItem: FC<IOrderProps> = ({ item }) => {
     for (let key in item.close_approach_data) {
       let newArr = item.close_approach_data[key];
       setDate(newArr.close_approach_data);
-      setDistance(item.close_approach_data[key].miss_distance);
+      setKilometers(item.close_approach_data[key].miss_distance.kilometers);
+      setLunar(item.close_approach_data[key].miss_distance.lunar);
     }
-  }, [distance]);
+  }, [kilometers, lunar]);
 
   useEffect(() => {
     setSize(
@@ -38,7 +40,7 @@ const OrderItem: FC<IOrderProps> = ({ item }) => {
       <div className={styles.container}>
         <div className={styles.boxDist}>
           <span className={styles.distance}>
-            {Math.round(distance?.kilometers)}км
+            {Math.round(kilometers ? kilometers : lunar)}км
           </span>
           <Image src={arrow} alt='стрелка' className={styles.arrow} />
         </div>

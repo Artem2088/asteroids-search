@@ -3,7 +3,7 @@ import { FC, useEffect, useState } from "react";
 import Link from "next/link";
 import { AsteroidCharachteristick, AsteroidProps } from "@/types";
 import styles from "../../styles/AsteroidEach.module.css";
-import AsteroidCharacteristick from "@/app/components/AsteroidCharacteristick";
+import { AsteroidCharacteristick } from "@/app/components";
 
 const AsteroidEach: FC<AsteroidProps> = () => {
   const [closeApproachDate, setCloseApproachDate] = useState<
@@ -21,17 +21,19 @@ const AsteroidEach: FC<AsteroidProps> = () => {
   const [diameterMilMax, setDiameterMilMax] = useState<number | undefined>(0);
   const [diameterMilMin, setDiameterMilMin] = useState<number | undefined>(0);
   const absoluteMagnitudeH = itemId?.absolute_magnitude_h;
-  const getlocalId =
+  const getlocalId: any =
     typeof window !== "undefined" ? localStorage.getItem("item") : null;
-  const getlocalParse = JSON.parse(getlocalId!);
-  const hazardous: boolean = itemId?.is_potentially_hazardous_asteroid!;
+  const getlocalParse: AsteroidProps = JSON.parse(getlocalId);
+  const hazardous: boolean | undefined =
+    itemId?.is_potentially_hazardous_asteroid;
+  const approach: any = itemId?.close_approach_data;
 
   useEffect(() => {
     setItemId(getlocalParse);
   }, []);
 
   useEffect(() => {
-    setCloseApproachDate(itemId?.close_approach_data);
+    setCloseApproachDate(approach);
 
     setDiameterKmMax(
       itemId?.estimated_diameter?.kilometers.estimated_diameter_max

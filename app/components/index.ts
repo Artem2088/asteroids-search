@@ -4,6 +4,7 @@ import Asteroid from "./Asteroid";
 import Button from "./Button";
 import Basket from "./Basket";
 import OrderItem from "./OrderItem";
+import AsteroidCharacteristick from "./AsteroidCharacteristick";
 
 
 export {
@@ -13,4 +14,5 @@ export {
     Button,
     Basket,
     OrderItem,
+    AsteroidCharacteristick
 }

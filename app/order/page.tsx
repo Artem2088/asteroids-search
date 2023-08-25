@@ -5,7 +5,6 @@ import { OrderItem } from "../components";
 import styles from "../styles/Order.module.css";
 import Image from "next/image";
 import earth from "../../public/images/planeta_zemlia.png";
-import Link from "next/link";
 
 const Order: FC = () => {
   const [listsItem, setListsItem] = useState<AsteroidProps[]>([]);
@@ -27,9 +26,6 @@ const Order: FC = () => {
       <Image src={earth} alt='earth' className={styles.earth} priority />
       <ul className={styles.lists}>
         <h1 className={styles.title}>Заказ отправлен!</h1>
-        <Link href={"/"} className={styles.linkFromMain} onClick={clearLocal}>
-          На главную
-        </Link>
         {listsItem?.map((item: AsteroidProps) => (
           <OrderItem item={item} key={item.id} />
         ))}

@@ -8,7 +8,7 @@ interface IMainProps {
   loading: boolean;
   addOrderLists: (item: AsteroidProps) => void;
   getItemId: (item: AsteroidProps) => void;
-  mainInfo: MaininfoProps[];
+  mainInfo: MaininfoProps;
 }
 
 const AsteroidsLists: FC<IMainProps> = ({

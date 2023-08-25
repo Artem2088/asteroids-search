@@ -4,7 +4,7 @@ import styles from "../styles/AsteroidCharacteristick.module.css";
 
 interface IAsteroidCharacteristick {
   item: {
-    close_approach_date: string;
+    close_approach_date: string | undefined;
     miss_distance: {
       astronomical: string;
       kilometers: string;

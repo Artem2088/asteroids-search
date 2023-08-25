@@ -20,11 +20,11 @@ export type MaininfoProps = {
 }
 
 export type AsteroidProps = {
-    absolute_magnitude_h?: number;
-    close_approach_data?: {
+    absolute_magnitude_h: number;
+    close_approach_data: {
         [key: string]: {
             close_approach_data: string;
-            miss_distance?: { kilometers: number; lunar: number };
+            miss_distance: { kilometers: number; lunar: number };
         };
     };
     estimated_diameter?: {
