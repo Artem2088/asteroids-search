@@ -1,16 +1,21 @@
 "use client";
 import "../styles/Asteroid.module.css";
-import styles from "../styles/Asteroid.module.css";
+import type { FC} from "react";
+import { useEffect, useState } from "react";
+
 import Image from "next/image";
+
 import arrow from "../../public/icons/Arrow.svg";
-import asteroid from "../../public/icons/asteroid_small.svg";
 import asteroidBig from "../../public/icons/asteroid_big.svg";
-import diameter from "../../public/icons/diameter.svg";
+import asteroid from "../../public/icons/asteroid_small.svg";
 import danger from "../../public/icons/danger.svg";
-import { Button } from ".";
-import { FC, useEffect, useState } from "react";
-import { AsteroidProps } from "@/types";
+import diameter from "../../public/icons/diameter.svg";
+import styles from "../styles/Asteroid.module.css";
 import { WORDS } from "../utils/constants";
+
+import type { AsteroidProps } from "@/types";
+
+import { Button } from ".";
 
 interface IAsteroidProps {
   date: string;

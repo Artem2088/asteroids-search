@@ -1,10 +1,10 @@
-import Header from "./Header";
-import AsteroidLists from "./AsteroidsLists";
 import Asteroid from "./Asteroid";
-import Button from "./Button";
-import Basket from "./Basket";
-import OrderItem from "./OrderItem";
 import AsteroidCharacteristick from "./AsteroidCharacteristick";
+import AsteroidLists from "./AsteroidsLists";
+import Basket from "./Basket";
+import Button from "./Button";
+import Header from "./Header";
+import OrderItem from "./OrderItem";
 
 
 export {

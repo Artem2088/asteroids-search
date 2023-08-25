@@ -20,7 +20,8 @@ export type MaininfoProps = {
 }
 
 export type AsteroidProps = {
-    absolute_magnitude_h: number;
+    id: string;
+    absolute_magnitude_h: never;
     close_approach_data: {
         [key: string]: {
             close_approach_data: string;
@@ -32,8 +33,8 @@ export type AsteroidProps = {
         kilometers: { estimated_diameter_max?: number; estimated_diameter_min?: number };
         miles: { estimated_diameter_max?: number; estimated_diameter_min?: number }
     };
-    is_potentially_hazardous_asteroid?: boolean;
-    name: string;
+    is_potentially_hazardous_asteroid: never;
+    name: never;
 }
 
 export type AsteroidCharachteristick = {

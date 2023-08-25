@@ -1,5 +1,5 @@
-import localFont from 'next/font/local';
 import { Passion_One } from "next/font/google";
+import localFont from 'next/font/local';
 
 export const helvitica = localFont({
     src: [

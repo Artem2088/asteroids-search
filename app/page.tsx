@@ -1,13 +1,19 @@
 "use client";
-import { FC } from "react";
-import styles from "./styles/Home.module.css";
-import Image from "next/image";
-import earth from "../public/images/planeta_zemlia.png";
-import { AsteroidLists, Basket } from "./components";
+import type { FC } from "react";
 import { useEffect, useState } from "react";
-import { getAsteroidInfo, getServerSideProps } from "./utils/MainApi";
-import { AsteroidProps, MaininfoProps } from "@/types";
+
+import Image from "next/image";
 import { useRouter } from 'next/navigation';
+
+import { AsteroidLists, Basket } from "./components";
+import styles from "./styles/Home.module.css";
+import { getAsteroidInfo, getServerSideProps } from "./utils/MainApi";
+import earth from "../public/images/planeta_zemlia.png";
+
+
+
+import type { AsteroidProps, MaininfoProps } from "@/types";
+
 
 const Home: FC = () => {
   const [mainInfo, setMainInfo] = useState<MaininfoProps[]>([]);

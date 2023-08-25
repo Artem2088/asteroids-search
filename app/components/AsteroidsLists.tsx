@@ -1,8 +1,12 @@
 "use client";
-import { FC, useEffect, useState } from "react";
-import { Asteroid } from ".";
+import type { FC} from "react";
+import { useEffect, useState } from "react";
+
 import styles from "../styles/AsteroidsLists.module.css";
-import { MaininfoProps, AsteroidProps } from "@/types";
+
+import type { AsteroidProps, MaininfoProps } from "@/types";
+
+import { Asteroid } from ".";
 
 interface IMainProps {
   loading: boolean;

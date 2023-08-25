@@ -1,13 +1,17 @@
 "use client";
-import React, { FC, useState, useEffect } from "react";
-import styles from "../styles/OrderItem.module.css";
+import type { FC } from "react";
+import React, { useEffect, useState } from "react";
+
 import Image from "next/image";
-import { AsteroidProps } from "@/types";
+
 import arrow from "../../public/icons/Arrow.svg";
-import asteroid from "../../public/icons/asteroid_small.svg";
 import asteroidBig from "../../public/icons/asteroid_big.svg";
-import diameter from "../../public/icons/diameter.svg";
+import asteroid from "../../public/icons/asteroid_small.svg";
 import danger from "../../public/icons/danger.svg";
+import diameter from "../../public/icons/diameter.svg";
+import styles from "../styles/OrderItem.module.css";
+
+import type { AsteroidProps } from "@/types";
 
 interface IOrderProps {
   item: AsteroidProps;

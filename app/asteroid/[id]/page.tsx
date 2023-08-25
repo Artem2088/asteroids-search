@@ -1,12 +1,17 @@
 "use client";
-import { FC, useEffect, useState } from "react";
+import type { FC } from "react";
+import { useEffect, useState } from "react";
+
 import Link from "next/link";
-import { AsteroidCharachteristick, AsteroidProps } from "@/types";
-import styles from "../../styles/AsteroidEach.module.css";
+
 import { AsteroidCharacteristick } from "@/app/components";
 
+import styles from "../../styles/AsteroidEach.module.css";
+
+import type { AsteroidCharachteristick, AsteroidProps } from "@/types";
+
 const AsteroidEach: FC<AsteroidProps> = () => {
-  const [name, setName] = useState<string | undefined>("");
+  const [name, setName] = useState<string | never>();
   const [closeApproachDate, setCloseApproachDate] = useState<
     AsteroidCharachteristick[]
   >([]);
@@ -22,15 +27,12 @@ const AsteroidEach: FC<AsteroidProps> = () => {
   const [diameterMilMax, setDiameterMilMax] = useState<number | undefined>(0);
   const [diameterMilMin, setDiameterMilMin] = useState<number | undefined>(0);
   const absoluteMagnitudeH = itemId?.absolute_magnitude_h;
-  const getlocalId: any =
-    typeof window !== "undefined" ? localStorage.getItem("item") : null;
-  const getlocalParse: AsteroidProps = JSON.parse(getlocalId);
-  const hazardous: boolean | undefined =
-    itemId?.is_potentially_hazardous_asteroid;
+  const getlocalId: AsteroidProps = JSON.parse(localStorage.getItem("item")!);
+  const hazardous = itemId?.is_potentially_hazardous_asteroid;
   const approach: any = itemId?.close_approach_data;
 
   useEffect(() => {
-    setItemId(getlocalParse);
+    setItemId(getlocalId);
   }, []);
 
   useEffect(() => {

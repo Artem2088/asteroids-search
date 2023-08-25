@@ -1,9 +1,14 @@
-import { FC } from "react";
-import { Button } from ".";
-import styles from "../styles/Basket.module.css";
-import { AsteroidProps } from "@/types";
+import type { FC } from "react";
+
 import Link from "next/link";
+
+
+import styles from "../styles/Basket.module.css";
 import { ENDINGS } from "../utils/constants";
+
+import type { AsteroidProps } from "@/types";
+
+import { Button } from ".";
 
 interface IBasketProps {
   orderLists: AsteroidProps[];

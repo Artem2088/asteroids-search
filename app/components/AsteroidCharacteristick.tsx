@@ -1,5 +1,7 @@
 "use client";
-import { FC, useState, useEffect } from "react";
+import type { FC} from "react";
+import { useEffect, useState } from "react";
+
 import styles from "../styles/AsteroidCharacteristick.module.css";
 
 interface IAsteroidCharacteristick {

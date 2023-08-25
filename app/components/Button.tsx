@@ -1,6 +1,7 @@
 "use client";
-import { ButtonProps } from "@/types";
-import { FC } from "react";
+import type { FC } from "react";
+
+import type { ButtonProps } from "@/types";
 
 const Button: FC<ButtonProps> = ({
   title,

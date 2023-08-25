@@ -1,25 +1,24 @@
 "use client";
-import { FC, useEffect, useState } from "react";
-import { AsteroidProps } from "@/types";
+import type { FC } from "react";
+import { useEffect, useState } from "react";
+
+import Image from "next/image";
+
+import earth from "../../public/images/planeta_zemlia.png";
 import { OrderItem } from "../components";
 import styles from "../styles/Order.module.css";
-import Image from "next/image";
-import earth from "../../public/images/planeta_zemlia.png";
+
+import type { AsteroidProps } from "@/types";
 
 const Order: FC = () => {
   const [listsItem, setListsItem] = useState<AsteroidProps[]>([]);
 
-  const getLocal =
-    typeof window !== "undefined" ? localStorage.getItem("localLists") : null;
+  const getLocal = localStorage.getItem("localLists");
   const order = JSON.parse(getLocal!);
 
   useEffect(() => {
     setListsItem(order);
   }, []);
-
-  const clearLocal = () => {
-    localStorage.clear();
-  };
 
   return (
     <section className={styles.order}>
