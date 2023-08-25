@@ -1,5 +1,5 @@
 "use client";
-import type { FC} from "react";
+import type { FC } from "react";
 import { useEffect, useState } from "react";
 
 import styles from "../styles/AsteroidsLists.module.css";
@@ -24,11 +24,12 @@ const AsteroidsLists: FC<IMainProps> = ({
   const [date, setDate] = useState<string>("");
   const [info, setInfo] = useState<AsteroidProps[]>([]);
   const [activ, setIsActiv] = useState<boolean>(false);
+  const newArray = mainInfo?.near_earth_objects;
 
   useEffect(() => {
-    for (let key in mainInfo?.near_earth_objects) {
+    for (let key in newArray) {
       setDate(key);
-      setInfo(mainInfo.near_earth_objects[key]);
+      setInfo(newArray[key]);
     }
   }, [loading]);
 
@@ -45,7 +46,6 @@ const AsteroidsLists: FC<IMainProps> = ({
             type='button'
             className={activ ? styles.btn : styles.btn_activ}
             onClick={handleClick}
-            id='kilometers'
           >
             в километрах
           </button>
@@ -54,7 +54,6 @@ const AsteroidsLists: FC<IMainProps> = ({
             type='button'
             className={activ ? styles.btn_activ : styles.btn}
             onClick={handleClick}
-            id='lunar'
           >
             в лунных орбитах
           </button>

@@ -10,8 +10,8 @@ import styles from "../../styles/AsteroidEach.module.css";
 
 import type { AsteroidCharachteristick, AsteroidProps } from "@/types";
 
-const AsteroidEach: FC<AsteroidProps> = () => {
-  const [name, setName] = useState<string | never>();
+const AsteroidEach: FC<AsteroidProps> = ({}) => {
+  const [name, setName] = useState<string>();
   const [closeApproachDate, setCloseApproachDate] = useState<
     AsteroidCharachteristick[]
   >([]);
@@ -26,16 +26,20 @@ const AsteroidEach: FC<AsteroidProps> = () => {
   );
   const [diameterMilMax, setDiameterMilMax] = useState<number | undefined>(0);
   const [diameterMilMin, setDiameterMilMin] = useState<number | undefined>(0);
-  const absoluteMagnitudeH = itemId?.absolute_magnitude_h;
-  const getlocalId: AsteroidProps = JSON.parse(localStorage.getItem("item")!);
+  const [absoluteMagnitudeH, setAbsoluteMagnitudeH] = useState<
+    number | undefined
+  >(0);
+
   const hazardous = itemId?.is_potentially_hazardous_asteroid;
   const approach: any = itemId?.close_approach_data;
 
   useEffect(() => {
+    const getlocalId = JSON.parse(localStorage.getItem("item")!);
     setItemId(getlocalId);
   }, []);
 
   useEffect(() => {
+    setAbsoluteMagnitudeH(itemId?.absolute_magnitude_h);
     setName(itemId?.name);
     setCloseApproachDate(approach);
 
@@ -110,7 +114,7 @@ const AsteroidEach: FC<AsteroidProps> = () => {
           {closeApproachDate?.map((item) => (
             <AsteroidCharacteristick
               item={item}
-              key={item.close_approach_date}
+              key={item?.epoch_date_close_approach}
             />
           ))}
         </ul>

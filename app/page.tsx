@@ -3,17 +3,14 @@ import type { FC } from "react";
 import { useEffect, useState } from "react";
 
 import Image from "next/image";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 
 import { AsteroidLists, Basket } from "./components";
 import styles from "./styles/Home.module.css";
 import { getAsteroidInfo, getServerSideProps } from "./utils/MainApi";
 import earth from "../public/images/planeta_zemlia.png";
 
-
-
 import type { AsteroidProps, MaininfoProps } from "@/types";
-
 
 const Home: FC = () => {
   const [mainInfo, setMainInfo] = useState<MaininfoProps[]>([]);
@@ -34,7 +31,7 @@ const Home: FC = () => {
   }, [itemId]);
 
   useEffect(() => {
-    const newOrder = JSON.stringify( orderLists );
+    const newOrder = JSON.stringify(orderLists);
     localStorage.setItem("localLists", newOrder);
   }, [orderLists]);
 
@@ -72,7 +69,7 @@ const Home: FC = () => {
       .then((data) => {
         const localItem = JSON.stringify(data);
         localStorage.setItem("item", localItem);
-        push('/asteroid/[id]');
+        push("/asteroid/[id]");
       })
       .catch((err) => {
         console.log(err);

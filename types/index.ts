@@ -20,24 +20,25 @@ export type MaininfoProps = {
 }
 
 export type AsteroidProps = {
-    id: string;
-    absolute_magnitude_h: never;
-    close_approach_data: {
-        [key: string]: {
-            close_approach_data: string;
-            miss_distance: { kilometers: number; lunar: number };
-        };
+    id: string | number;
+    absolute_magnitude_h: number | undefined;
+    close_approach_data?: {
+
+        close_approach_data: string;
+        miss_distance: { kilometers: number; lunar: number };
+
     };
-    estimated_diameter?: {
-        meters: { estimated_diameter_max?: number; estimated_diameter_min?: number };
-        kilometers: { estimated_diameter_max?: number; estimated_diameter_min?: number };
-        miles: { estimated_diameter_max?: number; estimated_diameter_min?: number }
+    estimated_diameter: {
+        meters: { estimated_diameter_max: number; estimated_diameter_min: number };
+        kilometers: { estimated_diameter_max: number; estimated_diameter_min: number };
+        miles: { estimated_diameter_max: number; estimated_diameter_min: number }
     };
     is_potentially_hazardous_asteroid: never;
     name: never;
 }
 
 export type AsteroidCharachteristick = {
+    epoch_date_close_approach: number;
     close_approach_date: string;
     miss_distance: {
         astronomical: string;

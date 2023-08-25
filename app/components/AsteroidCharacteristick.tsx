@@ -1,12 +1,13 @@
 "use client";
-import type { FC} from "react";
+import type { FC } from "react";
 import { useEffect, useState } from "react";
 
 import styles from "../styles/AsteroidCharacteristick.module.css";
 
 interface IAsteroidCharacteristick {
+  key?: number;
   item: {
-    close_approach_date: string | undefined;
+    close_approach_date: string;
     miss_distance: {
       astronomical: string;
       kilometers: string;
