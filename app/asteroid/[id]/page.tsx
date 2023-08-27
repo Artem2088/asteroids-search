@@ -10,11 +10,31 @@ import styles from "../../styles/AsteroidEach.module.css";
 
 import type { AsteroidCharachteristick, AsteroidProps } from "@/types";
 
-const AsteroidEach: FC<AsteroidProps> = ({}) => {
+const initialState = [
+  {
+    epoch_date_close_approach: 0,
+    close_approach_date: "",
+    miss_distance: {
+      astronomical: "",
+      kilometers: "",
+      lunar: "",
+      miles: "",
+    },
+    orbiting_body: "",
+    relative_velocity: {
+      kilometers_per_hour: "",
+      kilometers_per_second: "",
+      miles_per_hour: "",
+    },
+  },
+];
+
+const AsteroidEach: FC<AsteroidProps> = () => {
   const [name, setName] = useState<string>();
   const [closeApproachDate, setCloseApproachDate] = useState<
-    AsteroidCharachteristick[]
-  >([]);
+    AsteroidCharachteristick[] | undefined
+  >(initialState);
+
   const [itemId, setItemId] = useState<AsteroidProps>();
   const [diameterKmMin, setDiameterKmMin] = useState<number | undefined>(0);
   const [diameterKmMax, setDiameterKmMax] = useState<number | undefined>(0);
@@ -31,37 +51,41 @@ const AsteroidEach: FC<AsteroidProps> = ({}) => {
   >(0);
 
   const hazardous = itemId?.is_potentially_hazardous_asteroid;
-  const approach: any = itemId?.close_approach_data;
 
   useEffect(() => {
-    const getlocalId = JSON.parse(localStorage.getItem("item")!);
-    setItemId(getlocalId);
+    const getlocalId: string | undefined = localStorage.getItem("item") || "[]";
+    setItemId(JSON.parse(getlocalId));
   }, []);
 
   useEffect(() => {
-    setAbsoluteMagnitudeH(itemId?.absolute_magnitude_h);
-    setName(itemId?.name);
-    setCloseApproachDate(approach);
+    if (typeof itemId !== "undefined") {
+      setAbsoluteMagnitudeH(itemId.absolute_magnitude_h);
+      setName(itemId.name);
 
-    setDiameterKmMax(
-      itemId?.estimated_diameter?.kilometers.estimated_diameter_max
-    );
-    setDiameterKmMin(
-      itemId?.estimated_diameter?.kilometers.estimated_diameter_min
-    );
-    setDiameterMeterMax(
-      itemId?.estimated_diameter?.meters.estimated_diameter_max
-    );
-    setDiameterMeterMin(
-      itemId?.estimated_diameter?.meters.estimated_diameter_min
-    );
-    setDiameterMilMax(itemId?.estimated_diameter?.miles.estimated_diameter_max);
-    setDiameterMilMin(itemId?.estimated_diameter?.miles.estimated_diameter_min);
+      setCloseApproachDate(itemId.close_approach_data!);
+
+      setDiameterKmMax(
+        itemId.estimated_diameter.kilometers.estimated_diameter_max
+      );
+      setDiameterKmMin(
+        itemId.estimated_diameter.kilometers.estimated_diameter_min
+      );
+      setDiameterMeterMax(
+        itemId.estimated_diameter.meters.estimated_diameter_max
+      );
+      setDiameterMeterMin(
+        itemId.estimated_diameter.meters.estimated_diameter_min
+      );
+      setDiameterMilMax(itemId.estimated_diameter.miles.estimated_diameter_max);
+      setDiameterMilMin(itemId.estimated_diameter.miles.estimated_diameter_min);
+    }
   }, [itemId]);
 
   const localCleare = () => {
     localStorage.clear();
   };
+
+  console.log(itemId?.close_approach_data);
 
   return (
     <section className={styles.AsteroidEach}>

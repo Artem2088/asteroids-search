@@ -33,13 +33,15 @@ const AsteroidCharacteristick: FC<IAsteroidCharacteristick> = ({ item }) => {
   const [milesPerHour, setMilesPerHour] = useState<string>("");
 
   useEffect(() => {
-    setAstronomical(item.miss_distance.astronomical);
-    setKilometers(item.miss_distance.kilometers);
-    setLunar(item.miss_distance.lunar);
-    setMiles(item.miss_distance.miles);
-    setKilometersPerHour(item.relative_velocity.kilometers_per_hour);
-    setKilometersPerSecond(item.relative_velocity.kilometers_per_hour);
-    setMilesPerHour(item.relative_velocity.miles_per_hour);
+    if (typeof item !== "undefined") {
+      setAstronomical(item.miss_distance.astronomical);
+      setKilometers(item.miss_distance.kilometers);
+      setLunar(item.miss_distance.lunar);
+      setMiles(item.miss_distance.miles);
+      setKilometersPerHour(item.relative_velocity.kilometers_per_hour);
+      setKilometersPerSecond(item.relative_velocity.kilometers_per_hour);
+      setMilesPerHour(item.relative_velocity.miles_per_hour);
+    }
   }, []);
 
   return (

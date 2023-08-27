@@ -22,8 +22,9 @@ const AsteroidsLists: FC<IMainProps> = ({
   getItemId,
 }) => {
   const [date, setDate] = useState<string>("");
-  const [info, setInfo] = useState<AsteroidProps[]>([]);
+  const [info, setInfo] = useState<any>();
   const [activ, setIsActiv] = useState<boolean>(false);
+
   const newArray = mainInfo?.near_earth_objects;
 
   useEffect(() => {
@@ -63,7 +64,7 @@ const AsteroidsLists: FC<IMainProps> = ({
         {loading ? (
           <h3 className={styles.loading}>Loading...</h3>
         ) : (
-          info.map((item) => (
+          info?.map((item: AsteroidProps) => (
             <Asteroid
               item={item}
               key={item.id}

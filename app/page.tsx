@@ -13,10 +13,10 @@ import earth from "../public/images/planeta_zemlia.png";
 import type { AsteroidProps, MaininfoProps } from "@/types";
 
 const Home: FC = () => {
-  const [mainInfo, setMainInfo] = useState<MaininfoProps[]>([]);
+  const [mainInfo, setMainInfo] = useState<any>();
   const [loading, setLoading] = useState<boolean>(true);
   const [orderLists, setOrderLists] = useState<AsteroidProps[]>([]);
-  const [itemId, setItemId] = useState<string>("");
+  const [itemId, setItemId] = useState<string | number>("");
   const { push } = useRouter();
 
   useEffect(() => {
@@ -53,7 +53,7 @@ const Home: FC = () => {
 
   const getData = async () => {
     await getServerSideProps()
-      .then((data: MaininfoProps[]) => {
+      .then((data: MaininfoProps) => {
         setMainInfo(data);
       })
       .catch((err: string): void => {
@@ -67,6 +67,7 @@ const Home: FC = () => {
   const getAsteroid = async () => {
     await getAsteroidInfo(itemId)
       .then((data) => {
+        console.log(data);
         const localItem = JSON.stringify(data);
         localStorage.setItem("item", localItem);
         push("/asteroid/[id]");
