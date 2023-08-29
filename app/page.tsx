@@ -10,13 +10,14 @@ import styles from "./styles/Home.module.css";
 import { getAsteroidInfo, getServerSideProps } from "./utils/MainApi";
 import earth from "../public/images/planeta_zemlia.png";
 
-import type { AsteroidProps, MaininfoProps } from "@/types";
+import type { AsteroidProps } from "@/types";
 
 const Home: FC = () => {
-  const [mainInfo, setMainInfo] = useState<any>();
+  const [mainInfo, setMainInfo] = useState<AsteroidProps[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [orderLists, setOrderLists] = useState<AsteroidProps[]>([]);
-  const [itemId, setItemId] = useState<string | number>("");
+  const [itemId, setItemId] = useState<string>("");
+  const [date, setDate] = useState<string>("");
   const { push } = useRouter();
 
   useEffect(() => {
@@ -52,9 +53,14 @@ const Home: FC = () => {
   };
 
   const getData = async () => {
+    let newMainArr: AsteroidProps[] = [];
     await getServerSideProps()
-      .then((data: MaininfoProps) => {
-        setMainInfo(data);
+      .then((data) => {
+        for (let key in data.near_earth_objects) {
+          setDate(key);
+          newMainArr.push(data.near_earth_objects[key]);
+          setMainInfo(newMainArr);
+        }
       })
       .catch((err: string): void => {
         console.log(err);
@@ -67,7 +73,6 @@ const Home: FC = () => {
   const getAsteroid = async () => {
     await getAsteroidInfo(itemId)
       .then((data) => {
-        console.log(data);
         const localItem = JSON.stringify(data);
         localStorage.setItem("item", localItem);
         push("/asteroid/[id]");
@@ -81,7 +86,8 @@ const Home: FC = () => {
     <main className={styles.main}>
       <Image src={earth} alt='earth' className={styles.earth} priority />
       <AsteroidLists
-        mainInfo={mainInfo}
+        date={date}
+        mainData={mainInfo}
         loading={loading}
         addOrderLists={addOrderLists}
         getItemId={getItemId}

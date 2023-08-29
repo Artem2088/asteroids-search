@@ -12,24 +12,17 @@ export type ButtonProps = {
 }
 
 export type MaininfoProps = {
-    links: {};
-    element_count: number | undefined;
+    links?: {};
+    element_count?: number | undefined;
     near_earth_objects: {
-        [key: string | number]: {
-            [key: string | number]: AsteroidProps
-        }
+        [key: string]: AsteroidProps[]
     }
 }
 
 export type AsteroidProps = {
     id: string;
     absolute_magnitude_h: number | undefined;
-    close_approach_data?: {
-        close_approach_date: string | undefined;
-        miss_distance: {
-            kilometers: number | undefined; lunar: number | undefined
-        };
-    };
+    close_approach_data: AsteroidCharachteristick[];
     estimated_diameter: {
         meters: { estimated_diameter_max: number | undefined; estimated_diameter_min: number | undefined };
         kilometers: { estimated_diameter_max: number | undefined; estimated_diameter_min: number | undefined };

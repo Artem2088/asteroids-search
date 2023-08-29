@@ -12,26 +12,24 @@ interface IMainProps {
   loading: boolean;
   addOrderLists: (item: AsteroidProps) => void;
   getItemId: (item: AsteroidProps) => void;
-  mainInfo: MaininfoProps;
+  mainData: AsteroidProps[];
+  date: string;
 }
 
 const AsteroidsLists: FC<IMainProps> = ({
-  mainInfo,
+  mainData,
   loading,
   addOrderLists,
   getItemId,
+  date,
 }) => {
-  const [date, setDate] = useState<string>("");
-  const [info, setInfo] = useState<any>();
+  const [info, setInfo] = useState<AsteroidProps[]>([]);
   const [activ, setIsActiv] = useState<boolean>(false);
-
-  const newArray = mainInfo?.near_earth_objects;
+  const [dateList, setDateList] = useState<string>("");
 
   useEffect(() => {
-    for (let key in newArray) {
-      setDate(key);
-      setInfo(newArray[key]);
-    }
+    setInfo(mainData);
+    setDateList(date);
   }, [loading]);
 
   const handleClick = () => {
@@ -64,16 +62,20 @@ const AsteroidsLists: FC<IMainProps> = ({
         {loading ? (
           <h3 className={styles.loading}>Loading...</h3>
         ) : (
-          info?.map((item: AsteroidProps) => (
-            <Asteroid
-              item={item}
-              key={item.id}
-              date={date}
-              activ={activ}
-              addOrderLists={addOrderLists}
-              getItemId={getItemId}
-            />
-          ))
+          info?.map((prop) => {
+            return prop.map((subItem: AsteroidProps, i: number | undefined) => {
+              return (
+                <Asteroid
+                  item={subItem}
+                  key={i}
+                  date={dateList}
+                  activ={activ}
+                  addOrderLists={addOrderLists}
+                  getItemId={getItemId}
+                />
+              );
+            });
+          })
         )}
       </>
     </ul>

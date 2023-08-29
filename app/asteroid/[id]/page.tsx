@@ -62,7 +62,7 @@ const AsteroidEach: FC<AsteroidProps> = () => {
       setAbsoluteMagnitudeH(itemId.absolute_magnitude_h);
       setName(itemId.name);
 
-      setCloseApproachDate(itemId.close_approach_data!);
+      setCloseApproachDate(itemId.close_approach_data);
 
       setDiameterKmMax(
         itemId.estimated_diameter.kilometers.estimated_diameter_max
@@ -84,8 +84,6 @@ const AsteroidEach: FC<AsteroidProps> = () => {
   const localCleare = () => {
     localStorage.clear();
   };
-
-  console.log(itemId?.close_approach_data);
 
   return (
     <section className={styles.AsteroidEach}>

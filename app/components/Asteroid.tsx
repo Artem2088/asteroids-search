@@ -1,10 +1,9 @@
 "use client";
 import "../styles/Asteroid.module.css";
-import type { FC} from "react";
+import type { FC } from "react";
 import { useEffect, useState } from "react";
 
 import Image from "next/image";
-
 import arrow from "../../public/icons/Arrow.svg";
 import asteroidBig from "../../public/icons/asteroid_big.svg";
 import asteroid from "../../public/icons/asteroid_small.svg";
