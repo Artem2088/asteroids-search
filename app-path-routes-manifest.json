@@ -1,0 +1,5 @@
+{
+  "/page": "/",
+  "/order/page": "/order",
+  "/asteroid/[id]/page": "/asteroid/[id]"
+}
