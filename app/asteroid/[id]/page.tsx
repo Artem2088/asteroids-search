@@ -29,7 +29,13 @@ const initialState = [
   },
 ];
 
-const AsteroidEach: FC<AsteroidProps> = () => {
+interface IAsteroidProps {
+  params: {
+    id: string;
+  };
+}
+
+const AsteroidEach: FC<IAsteroidProps> = ({ params }: IAsteroidProps) => {
   const [name, setName] = useState<string>();
   const [closeApproachDate, setCloseApproachDate] = useState<
     AsteroidCharachteristick[] | undefined
@@ -53,8 +59,13 @@ const AsteroidEach: FC<AsteroidProps> = () => {
   const hazardous = itemId?.is_potentially_hazardous_asteroid;
 
   useEffect(() => {
-    const getlocalId: string | undefined = localStorage.getItem("item") || "[]";
-    setItemId(JSON.parse(getlocalId));
+    if (params.id) {
+      const getlocalId: string | undefined =
+        localStorage.getItem("item") || "[]";
+      setItemId(JSON.parse(getlocalId));
+    } else {
+      alert("Что-то пошло не так!");
+    }
   }, []);
 
   useEffect(() => {

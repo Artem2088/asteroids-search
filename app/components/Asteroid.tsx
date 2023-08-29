@@ -4,6 +4,7 @@ import type { FC } from "react";
 import { useEffect, useState } from "react";
 
 import Image from "next/image";
+
 import arrow from "../../public/icons/Arrow.svg";
 import asteroidBig from "../../public/icons/asteroid_big.svg";
 import asteroid from "../../public/icons/asteroid_small.svg";
@@ -85,7 +86,12 @@ const Asteroid: FC<IAsteroidProps> = ({
 
   return (
     <li className={styles.wrapper}>
-      <h3 className={styles.title} onClick={async () => await getItemId(item)}>
+      <h3
+        className={styles.title}
+        onClick={async () => {
+          getItemId(item);
+        }}
+      >
         {date}
       </h3>
       <div className={styles.container}>

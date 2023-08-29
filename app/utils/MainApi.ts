@@ -28,7 +28,7 @@ export const getServerSideProps = async () => {
     return checkResponse(res)
 }
 
-export const getAsteroidInfo = async (id: string | number | undefined) => {
+export const getAsteroidInfo = async (id: string | undefined) => {
     const res = await fetch(`https://api.nasa.gov/neo/rest/v1/neo/${id}?api_key=w0aIKsjDnvWNatg5wQVAeNgsWv9aZji2KMX9PAuo`, {
         method: "GET",
         headers: {

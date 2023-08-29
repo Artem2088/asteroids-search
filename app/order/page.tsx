@@ -13,10 +13,9 @@ import type { AsteroidProps } from "@/types";
 const Order: FC = () => {
   const [listsItem, setListsItem] = useState<AsteroidProps[]>([]);
 
-  const getLocal = localStorage.getItem("localLists");
-  const order = JSON.parse(getLocal!);
-
   useEffect(() => {
+    const getLocal = localStorage.getItem("localLists") || "[]";
+    const order = JSON.parse(getLocal);
     setListsItem(order);
   }, []);
 

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 import styles from "../styles/AsteroidsLists.module.css";
 
-import type { AsteroidProps, MaininfoProps } from "@/types";
+import type { AsteroidProps } from "@/types";
 
 import { Asteroid } from ".";
 
@@ -23,13 +23,13 @@ const AsteroidsLists: FC<IMainProps> = ({
   getItemId,
   date,
 }) => {
-  const [info, setInfo] = useState<AsteroidProps[]>([]);
+  const [info, setInfo] = useState<any[]>([]);
   const [activ, setIsActiv] = useState<boolean>(false);
   const [dateList, setDateList] = useState<string>("");
 
   useEffect(() => {
-    setInfo(mainData);
-    setDateList(date);
+    setInfo(mainData || []);
+    setDateList(date || "");
   }, [loading]);
 
   const handleClick = () => {

@@ -18,18 +18,23 @@ interface IOrderProps {
 }
 
 const OrderItem: FC<IOrderProps> = ({ item }) => {
-  const [kilometers, setKilometers] = useState<number>(0);
-  const [lunar, setLunar] = useState<number>(0);
+  const [kilometers, setKilometers] = useState<string>("");
+  const [lunar, setLunar] = useState<string>("");
   const [size, setSize] = useState<number>(0);
   const [date, setDate] = useState<string>("");
+  const [distance, setDistance] = useState<number>(0);
 
   useEffect(() => {
     for (let key in item.close_approach_data) {
       let newArr = item.close_approach_data[key];
-      setDate(newArr.close_approach_data);
+      setDate(newArr.close_approach_date);
       setKilometers(item.close_approach_data[key].miss_distance.kilometers);
       setLunar(item.close_approach_data[key].miss_distance.lunar);
     }
+  }, [kilometers, lunar]);
+
+  useEffect(() => {
+    setDistance(kilometers ? Math.round(+kilometers) : Math.round(+lunar));
   }, [kilometers, lunar]);
 
   useEffect(() => {
@@ -43,9 +48,7 @@ const OrderItem: FC<IOrderProps> = ({ item }) => {
       <h3 className={styles.title}>{date}</h3>
       <div className={styles.container}>
         <div className={styles.boxDist}>
-          <span className={styles.distance}>
-            {Math.round(kilometers ? kilometers : lunar)}км
-          </span>
+          <span className={styles.distance}>{distance}км</span>
           <Image src={arrow} alt='стрелка' className={styles.arrow} />
         </div>
         <Image

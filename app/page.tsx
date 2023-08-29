@@ -45,11 +45,8 @@ const Home: FC = () => {
     setOrderLists([...orderLists, item]);
   };
 
-  const getItemId = (item: AsteroidProps) => {
-    const newArr = Array(item);
-    newArr.forEach((item) => {
-      setItemId(item.id);
-    });
+  const getItemId = (itemIdAsteroid: AsteroidProps) => {
+    setItemId(itemIdAsteroid.id);
   };
 
   const getData = async () => {

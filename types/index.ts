@@ -33,7 +33,7 @@ export type AsteroidProps = {
 }
 
 export type AsteroidCharachteristick = {
-    [key: number]: number
+
     epoch_date_close_approach?: number;
     close_approach_date: string;
     miss_distance: {
