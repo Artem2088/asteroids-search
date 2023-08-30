@@ -18,7 +18,7 @@ Object.defineProperty(exports, "addBasePath", ({
 }));
 const _addpathprefix = __webpack_require__(893);
 const _normalizetrailingslash = __webpack_require__(1094);
-const basePath =  false || "";
+const basePath = "/asteroids-search" || 0;
 function addBasePath(path, required) {
     return (0, _normalizetrailingslash.normalizePathTrailingSlash)( false ? 0 : (0, _addpathprefix.addPathPrefix)(path, basePath));
 }
@@ -4599,7 +4599,7 @@ Object.defineProperty(exports, "getDomainLocale", ({
     }
 }));
 const _normalizetrailingslash = __webpack_require__(1094);
-const basePath = (/* unused pure expression or super */ null && ( false || ""));
+const basePath = (/* unused pure expression or super */ null && ("/asteroids-search" || 0));
 function getDomainLocale(path, locale, locales, domainLocales) {
     if (false) {} else {
         return false;
@@ -4631,7 +4631,7 @@ Object.defineProperty(exports, "hasBasePath", ({
     }
 }));
 const _pathhasprefix = __webpack_require__(4614);
-const basePath =  false || "";
+const basePath = "/asteroids-search" || 0;
 function hasBasePath(path) {
     return (0, _pathhasprefix.pathHasPrefix)(path, basePath);
 }
@@ -4672,7 +4672,7 @@ const _warnonce = __webpack_require__(8658);
 const _routercontext = __webpack_require__(7160);
 const _imageloader = /*#__PURE__*/ _interop_require_default._(__webpack_require__(5246));
 // This is replaced by webpack define plugin
-const configEnv = {"deviceSizes":[640,750,828,1080,1200,1920,2048,3840],"imageSizes":[16,32,48,64,96,128,256,384],"path":"/_next/image","loader":"default","dangerouslyAllowSVG":false,"unoptimized":false};
+const configEnv = {"deviceSizes":[640,750,828,1080,1200,1920,2048,3840],"imageSizes":[16,32,48,64,96,128,256,384],"path":"/asteroids-search/_next/image","loader":"default","dangerouslyAllowSVG":false,"unoptimized":false};
 if (true) {
     globalThis.__NEXT_IMAGE_IMPORTED = true;
 }
@@ -5265,7 +5265,7 @@ Object.defineProperty(exports, "removeBasePath", ({
     }
 }));
 const _hasbasepath = __webpack_require__(4374);
-const basePath =  false || "";
+const basePath = "/asteroids-search" || 0;
 function removeBasePath(path) {
     if (false) {}
     // Can't trim the basePath if it has zero length!
@@ -5488,7 +5488,7 @@ const unstable_getImgProps = (imgProps)=>{
     const { props } = (0, _getimgprops.getImgProps)(imgProps, {
         defaultLoader: _imageloader.default,
         // This is replaced by webpack define plugin
-        imgConf: {"deviceSizes":[640,750,828,1080,1200,1920,2048,3840],"imageSizes":[16,32,48,64,96,128,256,384],"path":"/_next/image","loader":"default","dangerouslyAllowSVG":false,"unoptimized":false}
+        imgConf: {"deviceSizes":[640,750,828,1080,1200,1920,2048,3840],"imageSizes":[16,32,48,64,96,128,256,384],"path":"/asteroids-search/_next/image","loader":"default","dangerouslyAllowSVG":false,"unoptimized":false}
     });
     for (const [key, value] of Object.entries(props)){
         if (value === undefined) {
