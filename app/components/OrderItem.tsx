@@ -24,10 +24,8 @@ const OrderItem: FC<IOrderProps> = ({ item }) => {
   const [size, setSize] = useState<number>(0);
   const [date, setDate] = useState<string>("");
   const [distance, setDistance] = useState<number>(0);
-  const [activStatus, setActivStatus] = useState<string>("");
+  const [activStatus, setActivStatus] = useState<string[]>([]);
   let newWords: string = "";
-
-  console.log(item);
 
   useEffect(() => {
     for (let key in item.close_approach_data) {
@@ -38,11 +36,11 @@ const OrderItem: FC<IOrderProps> = ({ item }) => {
     }
   }, [kilometers, lunar]);
 
-  // useEffect(() => {
-  //   activStatus.map((item) => {
-  //     setDistance(item ? Math.round(+kilometers) : Math.round(+lunar));
-  //   });
-  // }, [kilometers, lunar]);
+  useEffect(() => {
+    activStatus.map((item) => {
+      setDistance(item ? Math.round(+kilometers) : Math.round(+lunar));
+    });
+  }, [kilometers, lunar]);
 
   useEffect(() => {
     setSize(
@@ -54,10 +52,8 @@ const OrderItem: FC<IOrderProps> = ({ item }) => {
     const localActiv: string[] = JSON.parse(
       localStorage.getItem("activ") || "[]"
     );
-    localActiv.forEach((item) => {
-      setActivStatus(item);
-    });
-  }, [distance]);
+    setActivStatus(localActiv);
+  }, [kilometers, lunar]);
 
   const sklonenie = (
     num: number,
@@ -71,7 +67,6 @@ const OrderItem: FC<IOrderProps> = ({ item }) => {
   };
 
   sklonenie(+lunar, WORDS);
-  // console.log(distance, activStatus);
 
   return (
     <li className={styles.wrapper}>
@@ -79,7 +74,7 @@ const OrderItem: FC<IOrderProps> = ({ item }) => {
       <div className={styles.container}>
         <div className={styles.boxDist}>
           <span className={styles.distance}>
-            {/* {distance} */}
+            {distance}
             {activStatus ? "km" : newWords}
           </span>
           <Image src={arrow} alt='стрелка' className={styles.arrow} />
