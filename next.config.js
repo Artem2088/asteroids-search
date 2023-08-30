@@ -2,7 +2,7 @@
 const nextConfig = {
   output: "export",
   basePath: "/asteroids-search",
-  distDir: "build",
+  // distDir: "build",
 };
 
 module.exports = nextConfig;
