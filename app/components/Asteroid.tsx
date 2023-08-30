@@ -18,16 +18,14 @@ import type { AsteroidProps } from "@/types";
 import { Button } from ".";
 
 interface IAsteroidProps {
-  date: string;
   activ: boolean;
-  addOrderLists: (item: AsteroidProps) => void;
+  addOrderLists: (item: AsteroidProps, activ: boolean) => void;
   getItemId: (item: AsteroidProps) => void;
   item: AsteroidProps;
 }
 
 const Asteroid: FC<IAsteroidProps> = ({
   item,
-  date,
   activ,
   addOrderLists,
   getItemId,
@@ -37,10 +35,12 @@ const Asteroid: FC<IAsteroidProps> = ({
   const [size, setSize] = useState<number>(0);
   const [flag, setIsFlag] = useState<boolean>(false);
   const [status, setIsStatus] = useState<boolean>(false);
+  const [currentDate, setCurrentDate] = useState<string>("");
   let newWords: string = "";
 
   useEffect(() => {
     for (let key in item.close_approach_data) {
+      setCurrentDate(item.close_approach_data[key].close_approach_date);
       let distanceKilometers = Number(
         item.close_approach_data[key].miss_distance?.kilometers
       );
@@ -80,7 +80,7 @@ const Asteroid: FC<IAsteroidProps> = ({
   };
 
   const changeStatus = () => {
-    addOrderLists(item);
+    addOrderLists(item, activ);
     setIsStatus(true);
   };
 
@@ -92,7 +92,7 @@ const Asteroid: FC<IAsteroidProps> = ({
           getItemId(item);
         }}
       >
-        {date}
+        {currentDate}
       </h3>
       <div className={styles.container}>
         <div className={styles.boxDist}>

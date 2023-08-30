@@ -10,6 +10,7 @@ import asteroid from "../../public/icons/asteroid_small.svg";
 import danger from "../../public/icons/danger.svg";
 import diameter from "../../public/icons/diameter.svg";
 import styles from "../styles/OrderItem.module.css";
+import { WORDS } from "../utils/constants";
 
 import type { AsteroidProps } from "@/types";
 
@@ -23,6 +24,8 @@ const OrderItem: FC<IOrderProps> = ({ item }) => {
   const [size, setSize] = useState<number>(0);
   const [date, setDate] = useState<string>("");
   const [distance, setDistance] = useState<number>(0);
+  const [activStatus, setActivStatus] = useState<string[]>([]);
+  let newWords: string = "";
 
   useEffect(() => {
     for (let key in item.close_approach_data) {
@@ -34,7 +37,9 @@ const OrderItem: FC<IOrderProps> = ({ item }) => {
   }, [kilometers, lunar]);
 
   useEffect(() => {
-    setDistance(kilometers ? Math.round(+kilometers) : Math.round(+lunar));
+    activStatus.map((item) => {
+      setDistance(item ? Math.round(+kilometers) : Math.round(+lunar));
+    });
   }, [kilometers, lunar]);
 
   useEffect(() => {
@@ -43,12 +48,35 @@ const OrderItem: FC<IOrderProps> = ({ item }) => {
     );
   }, []);
 
+  useEffect(() => {
+    const localActiv: string[] = JSON.parse(
+      localStorage.getItem("activ") || "[]"
+    );
+    setActivStatus(localActiv);
+  }, []);
+
+  const sklonenie = (
+    num: number,
+    txt: string[],
+    cases = [2, 0, 1, 1, 1, 2]
+  ) => {
+    newWords =
+      txt[
+        num % 100 > 4 && num % 100 < 20 ? 2 : cases[num % 10 < 5 ? num % 10 : 5]
+      ];
+  };
+
+  sklonenie(+lunar, WORDS);
+
   return (
     <li className={styles.wrapper}>
       <h3 className={styles.title}>{date}</h3>
       <div className={styles.container}>
         <div className={styles.boxDist}>
-          <span className={styles.distance}>{distance}км</span>
+          <span className={styles.distance}>
+            {distance}
+            {lunar ? newWords : "km"}
+          </span>
           <Image src={arrow} alt='стрелка' className={styles.arrow} />
         </div>
         <Image

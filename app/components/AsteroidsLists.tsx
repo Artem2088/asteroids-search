@@ -10,10 +10,9 @@ import { Asteroid } from ".";
 
 interface IMainProps {
   loading: boolean;
-  addOrderLists: (item: AsteroidProps) => void;
+  addOrderLists: (item: AsteroidProps, activ: boolean) => void;
   getItemId: (item: AsteroidProps) => void;
   mainData: AsteroidProps[];
-  date: string;
 }
 
 const AsteroidsLists: FC<IMainProps> = ({
@@ -21,16 +20,40 @@ const AsteroidsLists: FC<IMainProps> = ({
   loading,
   addOrderLists,
   getItemId,
-  date,
 }) => {
   const [info, setInfo] = useState<any[]>([]);
   const [activ, setIsActiv] = useState<boolean>(false);
-  const [dateList, setDateList] = useState<string>("");
+  const [stepVisible, setStepVisible] = useState<number>(1);
+  const [isFetching, setIsFetching] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (isFetching) {
+      setStepVisible(stepVisible + 1);
+    }
+  }, [isFetching]);
 
   useEffect(() => {
     setInfo(mainData || []);
-    setDateList(date || "");
   }, [loading]);
+
+  useEffect(() => {
+    document.addEventListener("scroll", scrollHandler);
+    return function () {
+      document.removeEventListener("scroll", scrollHandler);
+    };
+  }, []);
+
+  const scrollHandler = (): void => {
+    if (
+      document.documentElement.scrollHeight -
+        (document.documentElement.scrollTop + window.innerHeight) <
+      100
+    ) {
+      setIsFetching(true);
+    } else {
+      setIsFetching(false);
+    }
+  };
 
   const handleClick = () => {
     setIsActiv(!activ);
@@ -62,13 +85,12 @@ const AsteroidsLists: FC<IMainProps> = ({
         {loading ? (
           <h3 className={styles.loading}>Loading...</h3>
         ) : (
-          info?.map((prop) => {
+          info?.slice(0, stepVisible).map((prop) => {
             return prop.map((subItem: AsteroidProps, i: number | undefined) => {
               return (
                 <Asteroid
                   item={subItem}
                   key={i}
-                  date={dateList}
                   activ={activ}
                   addOrderLists={addOrderLists}
                   getItemId={getItemId}

@@ -17,7 +17,7 @@ const Home: FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [orderLists, setOrderLists] = useState<AsteroidProps[]>([]);
   const [itemId, setItemId] = useState<string>("");
-  const [date, setDate] = useState<string>("");
+  const [loacalActiv, setLocalActiv] = useState<boolean[]>([]);
   const { push } = useRouter();
 
   useEffect(() => {
@@ -33,15 +33,18 @@ const Home: FC = () => {
 
   useEffect(() => {
     const newOrder = JSON.stringify(orderLists);
+    const newLocalActiv = JSON.stringify(loacalActiv);
+    localStorage.setItem("activ", newLocalActiv);
     localStorage.setItem("localLists", newOrder);
   }, [orderLists]);
 
-  const addOrderLists = (item: AsteroidProps) => {
+  const addOrderLists = (item: AsteroidProps, activ: boolean) => {
     for (let key in orderLists) {
       if (orderLists[key].id == item.id) {
         return false;
       }
     }
+    setLocalActiv([...loacalActiv, activ]);
     setOrderLists([...orderLists, item]);
   };
 
@@ -51,10 +54,10 @@ const Home: FC = () => {
 
   const getData = async () => {
     let newMainArr: AsteroidProps[] = [];
+
     await getServerSideProps()
       .then((data) => {
         for (let key in data.near_earth_objects) {
-          setDate(key);
           newMainArr.push(data.near_earth_objects[key]);
           setMainInfo(newMainArr);
         }
@@ -83,7 +86,6 @@ const Home: FC = () => {
     <main className={styles.main}>
       <Image src={earth} alt='earth' className={styles.earth} priority />
       <AsteroidLists
-        date={date}
         mainData={mainInfo}
         loading={loading}
         addOrderLists={addOrderLists}

@@ -1,8 +1,4 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  output: "export",
-  basePath: "/asteroids-search",
-  // distDir: "build",
-};
+const nextConfig = {};
 
 module.exports = nextConfig;
