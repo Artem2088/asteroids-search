@@ -11,7 +11,6 @@ import { getAsteroidInfo, getServerSideProps } from "./utils/MainApi";
 import earth from "../public/images/planeta_zemlia.png";
 
 import type { AsteroidProps } from "@/types";
-import Link from "next/link";
 
 const Home: FC = () => {
   const [mainInfo, setMainInfo] = useState<AsteroidProps[]>([]);
