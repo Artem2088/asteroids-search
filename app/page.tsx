@@ -11,6 +11,7 @@ import { getAsteroidInfo, getServerSideProps } from "./utils/MainApi";
 import earth from "../public/images/planeta_zemlia.png";
 
 import type { AsteroidProps } from "@/types";
+import Link from "next/link";
 
 const Home: FC = () => {
   const [mainInfo, setMainInfo] = useState<AsteroidProps[]>([]);
@@ -75,7 +76,8 @@ const Home: FC = () => {
       .then((data) => {
         const localItem = JSON.stringify(data);
         localStorage.setItem("item", localItem);
-        push("/asteroid/[id]");
+        console.log(data);
+        push(`asteroid/${data.id}`);
       })
       .catch((err) => {
         console.log(err);
