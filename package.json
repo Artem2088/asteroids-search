@@ -4,13 +4,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
+    "dev": "next dev",
+    "build": "next build",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d out"
   },
   "dependencies": {
     "@types/node": "20.4.10",
