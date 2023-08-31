@@ -3,7 +3,7 @@ import type { FC } from "react";
 import { useEffect, useState } from "react";
 
 import Image from "next/image";
-// import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 import { AsteroidLists, Basket } from "./components";
 import styles from "./styles/Home.module.css";
@@ -18,7 +18,7 @@ const Home: FC = () => {
   const [orderLists, setOrderLists] = useState<AsteroidProps[]>([]);
   const [itemId, setItemId] = useState<string>("");
   const [loacalActiv, setLocalActiv] = useState<boolean[]>([]);
-  // const { push } = useRouter();
+  const { push } = useRouter();
 
   useEffect(() => {
     getData();
@@ -75,7 +75,7 @@ const Home: FC = () => {
       .then((data) => {
         const localItem = JSON.stringify(data);
         localStorage.setItem("item", localItem);
-        // push(`asteroid-search/asteroid/${data.id}`);
+        push(`asteroid-search/asteroid/${data.id}`);
       })
       .catch((err) => {
         console.log(err);
