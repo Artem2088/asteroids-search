@@ -1,6 +1,8 @@
 "use client";
 import type { FC } from "react";
 import { useEffect, useState } from "react";
+import { InferGetStaticPropsType } from "next";
+import { GetStaticProps } from "next";
 
 import Link from "next/link";
 
@@ -37,7 +39,7 @@ interface IAsteroidProps {
   };
 }
 
-export async function getStaticPaths() {
+export const getStaticPaths = async () => {
   const day: any = new Date();
   const toDay: string =
     day.getFullYear() + "-" + (day.getMonth() + 1) + "-" + day.getDate();
@@ -56,17 +58,19 @@ export async function getStaticPaths() {
   }
 
   return { paths, fallback: false };
-}
+};
 
-export async function getStaticProps({ params }: IAsteroidProps) {
+export const getStaticProps: GetStaticProps = async (context) => {
   const res = await fetch(
-    `https://api.nasa.gov/neo/rest/v1/neo/${params.id}?api_key=w0aIKsjDnvWNatg5wQVAeNgsWv9aZji2KMX9PAuo`
+    `https://api.nasa.gov/neo/rest/v1/neo/${context.params?.id}?api_key=w0aIKsjDnvWNatg5wQVAeNgsWv9aZji2KMX9PAuo`
   );
-  const post = await res.json();
-  return { props: { post } };
-}
+  const asteroid = await res.json();
+  return { props: { asteroid } };
+};
 
-const AsteroidEach: FC<IAsteroidProps> = ({ asteroid }: IAsteroidProps) => {
+const AsteroidEach: FC<IAsteroidProps> = ({
+  asteroid,
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
   console.log(asteroid);
   const [name, setName] = useState<string>();
   const [closeApproachDate, setCloseApproachDate] = useState<
