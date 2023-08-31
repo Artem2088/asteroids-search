@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 
 import { AsteroidLists, Basket } from "./components";
 import styles from "./styles/Home.module.css";
-import { getAsteroidInfo, getServerSideProps } from "./utils/MainApi";
+import { getServerSideProps } from "./utils/MainApi";
 import earth from "../public/images/planeta_zemlia.png";
 
 import type { AsteroidProps } from "@/types";
@@ -18,7 +18,7 @@ const Home: FC = () => {
   const [orderLists, setOrderLists] = useState<AsteroidProps[]>([]);
   const [itemId, setItemId] = useState<string>("");
   const [loacalActiv, setLocalActiv] = useState<boolean[]>([]);
-  const { push } = useRouter();
+  // const { push } = useRouter();
 
   useEffect(() => {
     getData();
@@ -28,7 +28,7 @@ const Home: FC = () => {
     if (!itemId) {
       return;
     }
-    getAsteroid();
+    // getAsteroid();
   }, [itemId]);
 
   useEffect(() => {
@@ -70,17 +70,17 @@ const Home: FC = () => {
       });
   };
 
-  const getAsteroid = async () => {
-    await getAsteroidInfo(itemId)
-      .then((data) => {
-        const localItem = JSON.stringify(data);
-        localStorage.setItem("item", localItem);
-        push(`asteroid/${data.id}`);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  // const getAsteroid = async () => {
+  //   await getAsteroidInfo(itemId)
+  //     .then((data) => {
+  //       const localItem = JSON.stringify(data);
+  //       localStorage.setItem("item", localItem);
+  //       push(`asteroid/${data.id}`);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
   return (
     <main className={styles.main}>

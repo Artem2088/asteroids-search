@@ -30,12 +30,44 @@ const initialState = [
 ];
 
 interface IAsteroidProps {
+  asteroid: AsteroidProps;
+  context: any;
   params: {
     id: string;
   };
 }
 
-const AsteroidEach: FC<IAsteroidProps> = ({ params }: IAsteroidProps) => {
+export async function getStaticPaths() {
+  const day: any = new Date();
+  const toDay: string =
+    day.getFullYear() + "-" + (day.getMonth() + 1) + "-" + day.getDate();
+
+  const res = await fetch(
+    `https://api.nasa.gov/neo/rest/v1/feed?start_date=${toDay}&api_key=w0aIKsjDnvWNatg5wQVAeNgsWv9aZji2KMX9PAuo`
+  );
+  const asteroids = await res.json();
+  let paths = {};
+  for (let key in asteroids.near_earth_objects) {
+    paths = asteroids.near_earth_objects[key].map(
+      (asteroid: AsteroidProps) => ({
+        params: { id: asteroid.id },
+      })
+    );
+  }
+
+  return { paths, fallback: false };
+}
+
+export async function getStaticProps({ params }: IAsteroidProps) {
+  const res = await fetch(
+    `https://api.nasa.gov/neo/rest/v1/neo/${params.id}?api_key=w0aIKsjDnvWNatg5wQVAeNgsWv9aZji2KMX9PAuo`
+  );
+  const post = await res.json();
+  return { props: { post } };
+}
+
+const AsteroidEach: FC<IAsteroidProps> = ({ asteroid }: IAsteroidProps) => {
+  console.log(asteroid);
   const [name, setName] = useState<string>();
   const [closeApproachDate, setCloseApproachDate] = useState<
     AsteroidCharachteristick[] | undefined
@@ -58,37 +90,41 @@ const AsteroidEach: FC<IAsteroidProps> = ({ params }: IAsteroidProps) => {
 
   const hazardous = itemId?.is_potentially_hazardous_asteroid;
 
-  useEffect(() => {
-    if (params.id) {
-      const getlocalId: string | undefined =
-        localStorage.getItem("item") || "[]";
-      setItemId(JSON.parse(getlocalId));
-    } else {
-      alert("Что-то пошло не так!");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (asteroid.id) {
+  //     const getlocalId: string | undefined =
+  //       localStorage.getItem("item") || "[]";
+  //     setItemId(JSON.parse(getlocalId));
+  //   } else {
+  //     alert("Что-то пошло не так!");
+  //   }
+  // }, []);
 
   useEffect(() => {
-    if (typeof itemId !== "undefined") {
-      setAbsoluteMagnitudeH(itemId.absolute_magnitude_h);
-      setName(itemId.name);
+    if (typeof asteroid !== "undefined") {
+      setAbsoluteMagnitudeH(asteroid.absolute_magnitude_h);
+      setName(asteroid.name);
 
-      setCloseApproachDate(itemId.close_approach_data);
+      setCloseApproachDate(asteroid.close_approach_data);
 
       setDiameterKmMax(
-        itemId.estimated_diameter.kilometers.estimated_diameter_max
+        asteroid.estimated_diameter.kilometers.estimated_diameter_max
       );
       setDiameterKmMin(
-        itemId.estimated_diameter.kilometers.estimated_diameter_min
+        asteroid.estimated_diameter.kilometers.estimated_diameter_min
       );
       setDiameterMeterMax(
-        itemId.estimated_diameter.meters.estimated_diameter_max
+        asteroid.estimated_diameter.meters.estimated_diameter_max
       );
       setDiameterMeterMin(
-        itemId.estimated_diameter.meters.estimated_diameter_min
+        asteroid.estimated_diameter.meters.estimated_diameter_min
       );
-      setDiameterMilMax(itemId.estimated_diameter.miles.estimated_diameter_max);
-      setDiameterMilMin(itemId.estimated_diameter.miles.estimated_diameter_min);
+      setDiameterMilMax(
+        asteroid.estimated_diameter.miles.estimated_diameter_max
+      );
+      setDiameterMilMin(
+        asteroid.estimated_diameter.miles.estimated_diameter_min
+      );
     }
   }, [itemId]);
 
@@ -97,65 +133,71 @@ const AsteroidEach: FC<IAsteroidProps> = ({ params }: IAsteroidProps) => {
   };
 
   return (
-    <section className={styles.AsteroidEach}>
-      <div className={styles.wrapper}>
-        <h1 className={styles.name}>Название: {name}</h1>
-        <span className={styles.magnitudeH}>
-          Абсолютная звёздная величина: {absoluteMagnitudeH}H
-        </span>
-        <span className={styles.approach}>
-          Характеристики сближения с Землей:
-        </span>
-        <div className={styles.container}>
-          <h3 className={styles.distanceTitle}>Размер:</h3>
-          <div className={styles.kmBox}>
-            <span className={styles.kilometerMax}>
-              Киллометр(MAX): {diameterKmMax}
-            </span>
-            <span className={styles.kilometerMin}>
-              Киллометр(MIN): {diameterKmMin}
-            </span>
+    <Link href={`asteroid/${asteroid.id}`}>
+      <section className={styles.AsteroidEach}>
+        <div className={styles.wrapper}>
+          <h1 className={styles.name}>Название: {name}</h1>
+          <span className={styles.magnitudeH}>
+            Абсолютная звёздная величина: {absoluteMagnitudeH}H
+          </span>
+          <span className={styles.approach}>
+            Характеристики сближения с Землей:
+          </span>
+          <div className={styles.container}>
+            <h3 className={styles.distanceTitle}>Размер:</h3>
+            <div className={styles.kmBox}>
+              <span className={styles.kilometerMax}>
+                Киллометр(MAX): {diameterKmMax}
+              </span>
+              <span className={styles.kilometerMin}>
+                Киллометр(MIN): {diameterKmMin}
+              </span>
+            </div>
+            <div className={styles.metersBox}>
+              <span className={styles.metersMax}>
+                Метры (MAX): {diameterMeterMax}
+              </span>
+              <span className={styles.metersMin}>
+                Метры (MIN): {diameterMeterMin}
+              </span>
+            </div>
+            <div className={styles.milesBox}>
+              <span className={styles.milesMax}>
+                Мили(MAX): {diameterMilMax}
+              </span>
+              <span className={styles.milesMin}>
+                Мили(MIN): {diameterMilMin}
+              </span>
+            </div>
           </div>
-          <div className={styles.metersBox}>
-            <span className={styles.metersMax}>
-              Метры (MAX): {diameterMeterMax}
-            </span>
-            <span className={styles.metersMin}>
-              Метры (MIN): {diameterMeterMin}
-            </span>
-          </div>
-          <div className={styles.milesBox}>
-            <span className={styles.milesMax}>Мили(MAX): {diameterMilMax}</span>
-            <span className={styles.milesMin}>Мили(MIN): {diameterMilMin}</span>
-          </div>
+          <span className={styles.hazardous}>
+            Опасен:{" "}
+            {hazardous == false ? (
+              <span className={styles.notDanger}>Нет</span>
+            ) : (
+              <span className={styles.danger}>Да</span>
+            )}
+          </span>
+          <Link
+            href={"http://ssd.jpl.nasa.gov/sbdb.cgi?sstr=54376834"}
+            className={styles.linkNasa}
+          >
+            Ссылка NASA
+          </Link>
+          <ul className={styles.approachContainer}>
+            {closeApproachDate?.map((item) => (
+              <AsteroidCharacteristick
+                item={item}
+                key={item?.epoch_date_close_approach}
+              />
+            ))}
+          </ul>
+          <Link className={styles.back} href={"/"} onClick={localCleare}>
+            На главную
+          </Link>
         </div>
-        <span className={styles.hazardous}>
-          Опасен:{" "}
-          {hazardous == false ? (
-            <span className={styles.notDanger}>Нет</span>
-          ) : (
-            <span className={styles.danger}>Да</span>
-          )}
-        </span>
-        <Link
-          href={"http://ssd.jpl.nasa.gov/sbdb.cgi?sstr=54376834"}
-          className={styles.linkNasa}
-        >
-          Ссылка NASA
-        </Link>
-        <ul className={styles.approachContainer}>
-          {closeApproachDate?.map((item) => (
-            <AsteroidCharacteristick
-              item={item}
-              key={item?.epoch_date_close_approach}
-            />
-          ))}
-        </ul>
-        <Link className={styles.back} href={"/"} onClick={localCleare}>
-          На главную
-        </Link>
-      </div>
-    </section>
+      </section>
+    </Link>
   );
 };
 
