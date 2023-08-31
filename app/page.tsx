@@ -75,7 +75,6 @@ const Home: FC = () => {
       .then((data) => {
         const localItem = JSON.stringify(data);
         localStorage.setItem("item", localItem);
-        console.log(data);
         push(`asteroid/${data.id}`);
       })
       .catch((err) => {
