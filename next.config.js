@@ -3,8 +3,8 @@
  */
 const nextConfig = {
   output: "export",
-  basePath: "/asteroids-search",
-  trailingSlash: true,
+  // basePath: "/asteroids-search",
+  // trailingSlash: true,
 };
 
 module.exports = nextConfig;
