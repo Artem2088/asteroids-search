@@ -14,9 +14,11 @@ const Order: FC = () => {
   const [listsItem, setListsItem] = useState<AsteroidProps[]>([]);
 
   useEffect(() => {
-    const getLocal = localStorage.getItem("localLists") || "[]";
-    const order = JSON.parse(getLocal);
-    setListsItem(order);
+    if (typeof "window" !== "undefined") {
+      const getLocal = localStorage.getItem("localLists") || "[]";
+      const order = JSON.parse(getLocal);
+      setListsItem(order);
+    }
   }, []);
 
   return (

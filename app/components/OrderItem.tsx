@@ -49,10 +49,12 @@ const OrderItem: FC<IOrderProps> = ({ item }) => {
   }, []);
 
   useEffect(() => {
-    const localActiv: string[] = JSON.parse(
-      localStorage.getItem("activ") || "[]"
-    );
-    setActivStatus(localActiv);
+    if (typeof "window" !== "undefined") {
+      const localActiv: string[] = JSON.parse(
+        localStorage.getItem("activ") || "[]"
+      );
+      setActivStatus(localActiv);
+    }
   }, [kilometers, lunar]);
 
   const sklonenie = (
