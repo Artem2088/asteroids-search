@@ -104,31 +104,4 @@ const AsteroidsLists: FC<IMainProps> = ({
   );
 };
 
-export const getServerSidePaths = async () => {
-  const paths: AsteroidProps[] = [];
-  const day: any = new Date();
-  const toDay: string =
-    day.getFullYear() + "-" + (day.getMonth() + 1) + "-" + day.getDate();
-  const res = await fetch(
-    `https://api.nasa.gov/neo/rest/v1/feed?start_date=${toDay}&api_key=w0aIKsjDnvWNatg5wQVAeNgsWv9aZji2KMX9PAuo`
-  );
-
-  const result = await res.json();
-  if (res.status == 200) {
-    for (let key in result.near_earth_objects) {
-      paths.push(result.near_earth_objects[key]);
-      paths.forEach((item: any) => {
-        return item.map((subitem: AsteroidProps) => {
-          return {
-            params: { id: subitem.id },
-          };
-        });
-      });
-    }
-  } else {
-    console.error(res.text);
-  }
-  return { paths, fallback: false };
-};
-
 export default AsteroidsLists;
