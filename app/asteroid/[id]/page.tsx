@@ -30,12 +30,14 @@ const initialState = [
 ];
 
 interface IAsteroidProps {
+  asteroid: AsteroidProps;
   params: {
     id: string;
   };
 }
 
-const AsteroidEach: FC<IAsteroidProps> = ({ params }: IAsteroidProps) => {
+const AsteroidEach: FC<IAsteroidProps> = ({ asteroid }) => {
+  console.log(asteroid);
   const [name, setName] = useState<string>();
   const [closeApproachDate, setCloseApproachDate] = useState<
     AsteroidCharachteristick[] | undefined
@@ -60,13 +62,13 @@ const AsteroidEach: FC<IAsteroidProps> = ({ params }: IAsteroidProps) => {
 
   useEffect(() => {
     if (typeof "window" !== "undefined") {
-      if (params.id) {
-        const getlocalId: string | undefined =
-          localStorage.getItem("item") || "[]";
-        setItemId(JSON.parse(getlocalId));
-      } else {
-        alert("Что-то пошло не так!");
-      }
+      // if (params.id) {
+      const getlocalId: string | undefined =
+        localStorage.getItem("item") || "[]";
+      setItemId(JSON.parse(getlocalId));
+      // } else {
+      //   alert("Что-то пошло не так!");
+      // }
     }
   }, []);
 
@@ -159,6 +161,27 @@ const AsteroidEach: FC<IAsteroidProps> = ({ params }: IAsteroidProps) => {
       </div>
     </section>
   );
+};
+
+export const getServerSideProps = async ({
+  params,
+}: {
+  params: { id: string };
+}) => {
+  const res = await fetch(
+    `https://api.nasa.gov/neo/rest/v1/neo/${params.id}?api_key=w0aIKsjDnvWNatg5wQVAeNgsWv9aZji2KMX9PAuo`
+  );
+
+  const result = await res.json();
+  if (res.status == 200) {
+    return {
+      props: {
+        asteroid: result,
+      },
+    };
+  } else {
+    console.error(res.text);
+  }
 };
 
 export default AsteroidEach;
