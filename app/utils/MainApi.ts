@@ -15,7 +15,7 @@ function checkResponse(res: IResProps) {
 }
 
 
-export const getServerSideProps = async () => {
+export const getData = async () => {
     const day: any = new Date;
     const toDay: string = day.getFullYear() + '-' + (day.getMonth() + 1) + '-' + day.getDate();
 

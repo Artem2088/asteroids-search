@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 
 import { AsteroidLists, Basket } from "./components";
 import styles from "./styles/Home.module.css";
-import { getAsteroidInfo, getServerSideProps } from "./utils/MainApi";
+import { getAsteroidInfo, getData } from "./utils/MainApi";
 import earth from "../public/images/planeta_zemlia.png";
 
 import type { AsteroidProps } from "@/types";
@@ -21,7 +21,7 @@ const Home: FC = () => {
   const { push } = useRouter();
 
   useEffect(() => {
-    getData();
+    getMainData();
   }, []);
 
   useEffect(() => {
@@ -52,10 +52,10 @@ const Home: FC = () => {
     setItemId(itemIdAsteroid.id);
   };
 
-  const getData = async () => {
+  const getMainData = async () => {
     let newMainArr: AsteroidProps[] = [];
 
-    await getServerSideProps()
+    await getData()
       .then((data) => {
         for (let key in data.near_earth_objects) {
           newMainArr.push(data.near_earth_objects[key]);
