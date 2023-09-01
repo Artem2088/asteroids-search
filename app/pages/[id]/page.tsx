@@ -163,25 +163,4 @@ const AsteroidEach: FC<IAsteroidProps> = ({ asteroid }) => {
   );
 };
 
-export const getServerSideProps = async ({
-  params,
-}: {
-  params: { id: string };
-}) => {
-  const res = await fetch(
-    `https://api.nasa.gov/neo/rest/v1/neo/${params.id}?api_key=w0aIKsjDnvWNatg5wQVAeNgsWv9aZji2KMX9PAuo`
-  );
-
-  const result = await res.json();
-  if (res.status == 200) {
-    return {
-      props: {
-        asteroid: result,
-      },
-    };
-  } else {
-    console.error(res.text);
-  }
-};
-
 export default AsteroidEach;
